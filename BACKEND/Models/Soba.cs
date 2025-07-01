@@ -13,6 +13,6 @@ namespace BACKEND.Models
         public string? Dostupnost { get; set; }
         
         [Column(name: "broj_sobe")]
-        public double? BrojSobe { get; set; }
+        public int? BrojSobe { get; set; }
     }
 }

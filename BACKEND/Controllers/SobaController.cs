@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata;
 using BACKEND.Data;
+using BACKEND.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BACKEND.Controllers
@@ -32,5 +33,27 @@ namespace BACKEND.Controllers
                 return BadRequest(e); //kada se ne mozes spojiti na bazu
             }
         }
+
+        [HttpPost]
+        public IActionResult Post(Soba soba)
+        {
+            try
+            {
+                _context.Sobe.Add(soba);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, soba);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+
+
+
+
+
     }
 }
