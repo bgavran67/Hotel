@@ -68,23 +68,23 @@ values ('2025-06-01','2025-06-12','Trg Lavoslava Ružičke 2, 31000 Osijek','1',
 insert into rezervacije (gost,soba) 
 values (1,2), (2,3), (3,1), (4,2), (5,5)
 
-select a.sifra, b.sifra, a.datum_polaska, a.datum_odlaska, a.lokacija_polazista, b.ime, b.prezime,d.tip_sobe
-from prijevoz_gostiju a
-inner join gosti b on a.gost=b.sifra
-inner join rezervacije c on b.sifra = c.gost
-inner join  sobe d on d.sifra=c.soba
+--select a.sifra, b.sifra, a.datum_polaska, a.datum_odlaska, a.lokacija_polazista, b.ime, b.prezime,d.tip_sobe
+--from prijevoz_gostiju a
+--inner join gosti b on a.gost=b.sifra
+--inner join rezervacije c on b.sifra = c.gost
+--inner join  sobe d on d.sifra=c.soba
 
-select b.ime, b.prezime, b.email, d.tip_sobe
-from rezervacije c
-inner join gosti b on c.gost=b.sifra
-inner join sobe d on d.sifra=c.soba
+--select b.ime, b.prezime, b.email, d.tip_sobe
+--from rezervacije c
+--inner join gosti b on c.gost=b.sifra
+--inner join sobe d on d.sifra=c.soba
 
---ispisi imena i prezimena koji nisu koristili uslugu prijevoza
-select a.ime, a.prezime
-from gosti a
-left join prijevoz_gostiju b on a.sifra=b.gost
-where gost is null;
+----ispisi imena i prezimena koji nisu koristili uslugu prijevoza
+--select a.ime, a.prezime
+--from gosti a
+--left join prijevoz_gostiju b on a.sifra=b.gost
+--where gost is null;
 
---unesi jednog koji nema prijevoz do hotela
-insert into gosti(ime,prezime,email)
-values ('Barbara','Gavran','bgavran67@gmail.com');
+----unesi jednog koji nema prijevoz do hotela
+--insert into gosti(ime,prezime,email)
+--values ('Barbara','Gavran','bgavran67@gmail.com');
