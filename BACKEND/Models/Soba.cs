@@ -1,14 +1,18 @@
-﻿namespace BACKEND.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BACKEND.Models
 {
     public class Soba : Entitet
     {
+        [Column(name:"tip_sobe")] //ako zelim promjeniti naziv radim ovako --> [Column(name"izmjena")]
+        
         public string TipSobe { get; set; } = "";
-
+        
         public decimal Cijena { get; set; }
 
         public string? Dostupnost { get; set; }
-
+        
+        [Column(name: "broj_sobe")]
         public double? BrojSobe { get; set; }
-
     }
 }
