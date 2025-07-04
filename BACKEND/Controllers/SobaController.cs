@@ -49,8 +49,78 @@ namespace BACKEND.Controllers
             }
         }
 
+        [HttpPut("{sifra:int}")]
+        public IActionResult Put(int sifra, Soba soba)
+        {
+            if(sifra < 1)
+            {
+                return BadRequest(new { poruka = "Sifra mora biti veca od 0" });
+            }
+
+            try
+            {
+                Soba s = _context.Sobe.Find(sifra);
+
+                if(s == null)
+                {
+                    return NotFound();
+                }
+
+                //za sada rucno kasnije autmatika
+                s.TipSobe = soba.TipSobe;
+                s.BrojSobe = soba.BrojSobe;
+                s.Dostupnost = soba.Dostupnost;
+                s.Cijena = soba.Cijena;
+
+                _context.Sobe.Update(s);
+                _context.SaveChanges();
+                return Ok(s);
 
 
+
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+                
+            }
+        }
+
+
+
+
+        [HttpDelete("{sifra:int}")]
+        public IActionResult Delete(int sifra)
+        {
+            if (sifra < 1)
+            {
+                return BadRequest(new { poruka = "Sifra mora biti veca od 0" });
+            }
+
+            try
+            {
+                Soba s = _context.Sobe.Find(sifra);
+
+                if (s == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Sobe.Remove(s);
+                _context.SaveChanges();
+                return NoContent();
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+
+            }
+        }
 
 
 

@@ -9,7 +9,7 @@ namespace BACKEND.Controllers
         [Route("api/v1/[controller]")]
         public class GostController : ControllerBase
         {
-            //koristimo dependenx< injection
+            //koristimo dependency injection
 
             //1. definiramo privatno svojstvo
             private readonly EdunovaContext _context;
