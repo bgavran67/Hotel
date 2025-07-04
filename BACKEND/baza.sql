@@ -1,10 +1,21 @@
-﻿use master;
-go
-drop database if exists zavrsniradhotel;
-go
-create database zavrsniradhotel collate Croatian_CI_AS;
-go
-use zavrsniradhotel;
+﻿
+ALTER DATABASE db_abb4f5_wp8 SET SINGLE_USER WITH
+ROLLBACK IMMEDIATE;
+GO
+ALTER DATABASE db_abb4f5_wp8 COLLATE Latin1_General_100_CI_AI_SC_UTF8;
+GO
+ALTER DATABASE db_abb4f5_wp8 SET MULTI_USER;
+GO 
+--ovo sve kopirati u sql 
+
+
+--use master;
+--go
+--drop database if exists zavrsniradhotel;
+--go
+--create database zavrsniradhotel collate Croatian_CI_AS;
+--go
+--use zavrsniradhotel;
 
 
 create table sobe(
