@@ -13,7 +13,7 @@ namespace BACKEND.Data
         public DbSet<Soba> Sobe { get; set; } //zbog ovog ovdje Soba tablica se zove u mnozini
 
         public DbSet<Gost> Gosti { get; set; }
-
+        
 
     }
 }
