@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import SobeService from "../../services/SobeService";
+import { NumericFormat } from "react-number-format";
+import { GrValidate } from "react-icons/gr";
 
 
 export default function SobePregled(){
@@ -21,12 +23,12 @@ export default function SobePregled(){
 
     return(
         <>
-        Pregled soba
+        Tablični pregled soba
         <Table striped bordered hover responsive>
             <thead>
                 <tr>
                     <th>Tip sobe</th>
-                    <th>Cijena</th>
+                    <th>Cijena (u eurima)</th>
                     <th>Dostupnost</th>
                     <th>Broj sobe</th>
                 </tr>
@@ -35,8 +37,25 @@ export default function SobePregled(){
                 {sobe && sobe.map((sobe,index)=>(
                     <tr key={index}>
                         <td>{sobe.tipSobe}</td>
-                        <td>{sobe.cijena}</td>
-                        <td>{sobe.dostupnost}</td>
+                        <td className="desno">
+                            <NumericFormat
+                            value={sobe.cijena}
+                            displayType={'text'}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            suffix={' €'}
+                            decimalScale={2}
+                            fixedDecimalScale
+                            />
+                        </td>
+                        <td className="sredina">
+                            <GrValidate 
+                            size={30}
+                            color={sobe.dostupnost ? 'green' : 'red'}
+                            title={sobe.dostupnost ? 'DA' : 'NE'}
+                        
+                            />
+                        </td>
                         <td>{sobe.brojSobe}</td>
                     </tr>
                 ))}

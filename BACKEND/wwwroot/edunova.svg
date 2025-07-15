@@ -1,0 +1,13 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#000" d="m110.21089,107.11138c0,6.25108 0,12.50215 0,18.75323c0,12.50215 0,25.0043 0,37.50645c0,31.25539 0,31.25539 0,43.75754c0,6.25107 0,18.75322 0,31.25537c0,12.50215 0,18.75323 0,31.25537c0,6.25107 0,12.50217 0,25.0043c0,12.50217 -28.70321,31.75705 0,50.00861c21.39411,13.60391 41.64358,18.75323 41.64358,25.0043c0,6.25107 0,6.25107 0,12.50217c0,6.25107 0,12.50214 0,12.50214c0,12.50217 0,25.0043 0,37.50647c0,0 0,6.25107 41.64358,6.25107c41.64358,0 43.87158,-2.87241 124.93075,0c90.62691,3.21146 124.9307,6.25107 208.21786,6.25107l83.28717,0l41.64363,0l41.64353,0" id="svg_1" fill="none"/>
+  <rect transform="rotate(-22 468.182 200.878)" stroke-dasharray="2,2" id="svg_2" height="250.04302" width="450.07744" y="75.85601" x="243.14356" stroke="#000" fill="none"/>
+  <rect id="svg_3" height="6.25108" width="0" y="382.15871" x="611.95702" stroke-dasharray="2,2" stroke="#000" fill="none"/>
+  <rect id="svg_4" height="6.25108" width="18.75323" y="219.63075" x="268.14787" stroke-dasharray="2,2" stroke="#000" fill="none"/>
+  <rect id="svg_5" height="6.25108" width="0" y="250.88612" x="505.68874" stroke-dasharray="2,2" stroke="#000" fill="none"/>
+  <rect id="svg_6" height="31.25538" width="93.76613" y="363.40548" x="343.16077" stroke-dasharray="2,2" stroke="#000" fill="none"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="150" stroke-width="0" id="svg_7" y="232.1329" x="136.87528" stroke-dasharray="2,2" stroke="#000" fill="#000000">Zlatko</text>
+ </g>
+</svg>
