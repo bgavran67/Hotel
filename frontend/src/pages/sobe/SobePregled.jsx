@@ -3,7 +3,8 @@ import { Container, Table } from "react-bootstrap";
 import SobeService from "../../services/SobeService";
 import { NumericFormat } from "react-number-format";
 import { GrValidate } from "react-icons/gr";
-
+import { Link } from "react-router-dom";
+import { RouteNames } from "../../constants";
 
 export default function SobePregled(){
 
@@ -23,7 +24,12 @@ export default function SobePregled(){
 
     return(
         <>
-        Tablični pregled soba
+        
+        <Link 
+        className="btn btn-success"
+        to={RouteNames.SOBA_NOVI} >Dodavanje nove sobe</Link>
+
+
         <Table striped bordered hover responsive>
             <thead>
                 <tr>

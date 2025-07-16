@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constants'
 import Pocetna from './pages/Pocetna'
 import SobePregled from './pages/sobe/SobePregled'
-
+import SobeDodaj from './pages/sobe/SobeDodaj'
 
 function App() {
   
@@ -20,7 +20,8 @@ function App() {
         <Route path={RouteNames.HOME} element={<Pocetna />} />
 
         <Route path={RouteNames.SOBA_PREGLED} element={<SobePregled />} />
-        
+        <Route path={RouteNames.SOBA_NOVI} element={< SobeDodaj />} /> 
+
       </Routes>
       </Container>
       
