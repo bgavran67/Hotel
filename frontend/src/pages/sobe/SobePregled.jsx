@@ -29,14 +29,15 @@ export default function SobePregled(){
         className="btn btn-success"
         to={RouteNames.SOBA_NOVI} >Dodavanje nove sobe</Link>
 
-
+        
         <Table striped bordered hover responsive>
+            
             <thead>
                 <tr>
                     <th>Tip sobe</th>
                     <th>Cijena (u eurima)</th>
                     <th>Dostupnost</th>
-                    <th>Broj sobe</th>
+                    <th>Broj sobe</th> 
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +62,7 @@ export default function SobePregled(){
                             title={sobe.dostupnost ? 'DA' : 'NE'}
                         
                             />
+                            
                         </td>
                         <td>{sobe.brojSobe}</td>
                     </tr>
