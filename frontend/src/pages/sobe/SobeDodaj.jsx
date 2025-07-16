@@ -1,21 +1,49 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import { MdPadding } from "react-icons/md";
+import SobeService from "../../services/SobeService";
 
 export default function SobeDodaj()
 {
+    const navigate = useNavigate();
+
+    async function dodaj(soba){
+        const odgovor = await SobeService.dodaj(soba);
+        navigate(RouteNames.SOBA_PREGLED);
+    }
+
+
+
+    function odradiSubmit(e){
+        e.preventDefault();
+
+        let podaci = new FormData(e.target); //dohvaćamo sve podatke iz forme
+
+        dodaj(
+            {
+            tipSobe: podaci.get('tipSobe'),
+            cijena: parseFloat(podaci.get('cijena')),
+            dostupnost: podaci.get('dostupnost'),
+            brojSobe: parseFloat(podaci.get('brojSobe'))
+            }
+
+            //za bool - podaci.get('dostupan')=='on'
+            //datum - moment.utc(podaci.get(('datumPokretanja')))
+        )
+    }
+
+
     return(
         <>
         
         Dodavanje sobe
         
-        <Form>
+        <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="tip sobe">
 
             <Form.Label>Tip sobe</Form.Label>
-            <Form.Control type="text" name="tip_sobe" required></Form.Control>
+            <Form.Control type="text" name="tipSobe" required></Form.Control>
 
         </Form.Group>
 
@@ -36,7 +64,7 @@ export default function SobeDodaj()
         <Form.Group controlId="broj sobe">
 
             <Form.Label>Broj sobe</Form.Label>
-            <Form.Control type="number" name="broj_sobe" required></Form.Control>
+            <Form.Control type="number" name="brojSobe" required></Form.Control>
 
         <hr style={{marginTop: '15px'}} />
 

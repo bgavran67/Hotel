@@ -41,12 +41,12 @@ export default function SobePregled(){
                 </tr>
             </thead>
             <tbody>
-                {sobe && sobe.map((sobe,index)=>(
+                {sobe && sobe.map((soba,index)=>(
                     <tr key={index}>
-                        <td>{sobe.tipSobe}</td>
+                        <td>{soba.tipSobe}</td>
                         <td className="desno">
                             <NumericFormat
-                            value={sobe.cijena}
+                            value={soba.cijena}
                             displayType={'text'}
                             thousandSeparator='.'
                             decimalSeparator=','
@@ -55,7 +55,8 @@ export default function SobePregled(){
                             fixedDecimalScale
                             />
                         </td>
-                        <td className="sredina">
+                        <td>{soba.dostupnost}</td>
+                        {/* <td className="sredina">
                             <GrValidate 
                             size={30}
                             color={sobe.dostupnost ? 'green' : 'red'}
@@ -63,8 +64,8 @@ export default function SobePregled(){
                         
                             />
                             
-                        </td>
-                        <td>{sobe.brojSobe}</td>
+                        </td> */}
+                        <td>{soba.brojSobe}</td>
                     </tr>
                 ))}
             </tbody>

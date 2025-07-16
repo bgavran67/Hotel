@@ -13,6 +13,15 @@ return await HttpService.get('/Soba')
 .catch((e)=>{})
 }
 
-export default{
-    get
+async function dodaj(soba) {
+    return await HttpService.post('/Soba',soba)
+    .then((odgovor)=>{return true})
+    .catch((e)=>{return false})
 }
+
+
+export default{
+    get,
+    dodaj
+}
+
