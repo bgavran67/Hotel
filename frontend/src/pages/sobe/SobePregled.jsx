@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Container, Table } from "react-bootstrap";
 import SobeService from "../../services/SobeService";
 import { NumericFormat } from "react-number-format";
 import { GrValidate } from "react-icons/gr";
@@ -22,6 +22,21 @@ export default function SobePregled(){
          dohvatiSobe();
     },[])
 
+    function obrisi(sifra){
+        if(!confirm('Sigurno obrisati')){
+            return;
+        }
+        brisanje(sifra)
+    }
+
+    async function brisanje(sifra) {
+        const odgovor = await SobeService.obrisi(sifra);
+        dohvatiSobe();
+    }
+
+
+
+
     return(
         <>
         
@@ -38,9 +53,13 @@ export default function SobePregled(){
                     <th>Cijena (u eurima)</th>
                     <th>Dostupnost</th>
                     <th>Broj sobe</th> 
+                    <th>Akcija</th>
                 </tr>
+
             </thead>
+
             <tbody>
+
                 {sobe && sobe.map((soba,index)=>(
                     <tr key={index}>
                         <td>{soba.tipSobe}</td>
@@ -55,6 +74,7 @@ export default function SobePregled(){
                             fixedDecimalScale
                             />
                         </td>
+
                         <td>{soba.dostupnost}</td>
                         {/* <td className="sredina">
                             <GrValidate 
@@ -65,10 +85,21 @@ export default function SobePregled(){
                             />
                             
                         </td> */}
+
                         <td>{soba.brojSobe}</td>
+
+                        <td>
+                            <Button variant="danger"
+                                onClick={()=>obrisi(soba.sifra)}>
+                                Obriši
+                            </Button>
+                        </td>
+
                     </tr>
                 ))}
+
             </tbody>
+            
         </Table>
         </>
     )

@@ -19,9 +19,15 @@ async function dodaj(soba) {
     .catch((e)=>{return false})
 }
 
+async function obrisi(sifra) {
+    return await HttpService.delete('/Soba/'+sifra)
+    .then((odgovor)=>{return true})
+    .catch((e)=>{return false})
+}
 
 export default{
     get,
-    dodaj
+    dodaj,
+    obrisi
 }
 
