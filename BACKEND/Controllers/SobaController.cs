@@ -34,6 +34,31 @@ namespace BACKEND.Controllers
             }
         }
 
+        //nova metoda dodana
+        [HttpGet("{sifra:int}")]
+        public IActionResult Get(int sifra)
+        {
+            if (sifra <= 0)
+            {
+                return BadRequest("Šifra nije dobra");
+            }
+            try
+            {
+                var soba = _context.Sobe.Find(sifra);
+                if (soba == null)
+                {
+                    return NotFound();
+                }
+                return Ok(soba);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e); //kada se ne mozes spojiti na bazu
+            }
+        }
+
+
         [HttpPost]
         public IActionResult Post(Soba soba)
         {
