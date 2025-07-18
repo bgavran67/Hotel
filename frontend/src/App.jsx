@@ -7,6 +7,7 @@ import { RouteNames } from './constants'
 import Pocetna from './pages/Pocetna'
 import SobePregled from './pages/sobe/SobePregled'
 import SobeDodaj from './pages/sobe/SobeDodaj'
+import SobePromjena from './pages/sobe/SobePromjena'
 
 function App() {
   
@@ -21,7 +22,7 @@ function App() {
 
         <Route path={RouteNames.SOBA_PREGLED} element={<SobePregled />} />
         <Route path={RouteNames.SOBA_NOVI} element={< SobeDodaj />} /> 
-
+    <Route path={RouteNames.SOBA_PROMJENA} element={< SobePromjena />} /> 
       </Routes>
       </Container>
       

@@ -3,12 +3,13 @@ import { Button, Container, Table } from "react-bootstrap";
 import SobeService from "../../services/SobeService";
 import { NumericFormat } from "react-number-format";
 import { GrValidate } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
 
 export default function SobePregled(){
 
     const[sobe, setSobe] = useState([]);
+    const navigate = useNavigate();
 
     async function dohvatiSobe() {
         const odgovor = await SobeService.get()
@@ -89,10 +90,20 @@ export default function SobePregled(){
                         <td>{soba.brojSobe}</td>
 
                         <td>
+
+                            
+                            
+                            <Button 
+                                onClick={()=>navigate(`/sobe/${soba.sifra}`)}>
+                                Promjena
+                            </Button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+
                             <Button variant="danger"
                                 onClick={()=>obrisi(soba.sifra)}>
                                 Obriši
                             </Button>
+
                         </td>
 
                     </tr>
