@@ -12,7 +12,7 @@ export default function SobePromjena()
     
 
     async function ucitajSobu() {
-        const odgovor = await SobeService.getbySifra(params.sifra)
+        const odgovor = await SobeService.getBySifra(params.sifra)
        // za datum dodajemo - odgovor.datumPokretanja = moment.utc(odgovor.datumPokretanja).format('yyyy-MM-DD')
         setSoba(odgovor)
         //setAktivan(odgovor.aktivan)  za boolean pri promjeni
@@ -24,7 +24,7 @@ export default function SobePromjena()
 
     async function promjena(sifra, soba){
         const odgovor = await SobeService.promjeni(sifra, soba);
-        navigate(RouteNames.SOBA_PROMJENA);
+        navigate(RouteNames.SOBA_PREGLED);
     }
 
 
