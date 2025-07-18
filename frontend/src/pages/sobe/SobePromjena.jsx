@@ -1,15 +1,15 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import SobeService from "../../services/SobeService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SobePromjena()
 {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const params = useParams()
     const [soba,setSoba]=useState({})
-    const[aktivan,setAktivan]=useState(false)
+    
 
     async function ucitajSobu() {
         const odgovor = await SobeService.getbySifra(params.sifra)
@@ -59,29 +59,29 @@ export default function SobePromjena()
         <Form.Group controlId="tip sobe">
 
             <Form.Label>Tip sobe</Form.Label>
-            <Form.Control type="text" name="tipSobe" required>
-            defaultValue = {soba.tipSobe} </Form.Control>
+            <Form.Control type="text" name="tipSobe" required
+            defaultValue = {soba.tipSobe} />
         </Form.Group>
 
         <Form.Group controlId="cijena">
 
             <Form.Label>Cijena</Form.Label>
-            <Form.Control type="number" name="cijena" step={0.01}>
-            defaultValue = {soba.cijena}</Form.Control>
+            <Form.Control type="number" name="cijena" step={0.01}
+            defaultValue = {soba.cijena}/>
         </Form.Group>
 
         <Form.Group controlId="dostupnost">
 
             <Form.Label>Dostupan</Form.Label>
-            <Form.Control type="text" name="dostupnost" required>
-            defaultValue = {soba.dostupnost}</Form.Control>
+            <Form.Control type="text" name="dostupnost" required
+            defaultValue = {soba.dostupnost}/>
         </Form.Group>
 
         <Form.Group controlId="broj sobe">
 
             <Form.Label>Broj sobe</Form.Label>
-            <Form.Control type="number" name="brojSobe" required>
-            defaultValue = {soba.brojSobe} </Form.Control>
+            <Form.Control type="number" name="brojSobe" required
+            defaultValue = {soba.brojSobe}/>
 
         <hr style={{marginTop: '15px'}} />
 
