@@ -1,5 +1,8 @@
 .vs
 BACKEND/bin
 BACKEND/obj
+BACKEND/appsettings.Development.json
+BACKEND/appsettings.json
 WebAPI/bin
 WebAPI/obj
+BACKEND/appsettings.Development.json
