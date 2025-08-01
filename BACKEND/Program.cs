@@ -14,8 +14,10 @@ builder.Services.AddSwaggerGen();
 //dodavanje DB contexta
 builder.Services.AddDbContext<EdunovaContext>(o =>
 {
-    o.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"));
+    o.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure());
 });
+
 
 // Svi se od svuda na sve moguæe naèine mogu spojiti na naš API
 // èitati https://code-maze.com/aspnetcore-webapi-best-practices/

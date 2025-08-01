@@ -30,7 +30,8 @@ namespace BACKEND.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(e); //kada se ne mozes spojiti na bazu
+                return BadRequest(new { poruka = e.Message });
+                //kada se ne mozes spojiti na bazu
             }
         }
 
@@ -54,7 +55,8 @@ namespace BACKEND.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(e); //kada se ne mozes spojiti na bazu
+                return BadRequest(new { poruka = e.Message });
+                //kada se ne mozes spojiti na bazu
             }
         }
 
@@ -70,7 +72,8 @@ namespace BACKEND.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = e.Message });
+
             }
         }
 
@@ -107,8 +110,9 @@ namespace BACKEND.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
-                
+                return BadRequest(new { poruka = e.Message });
+
+
             }
         }
 
@@ -142,7 +146,8 @@ namespace BACKEND.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = e.Message });
+
 
             }
         }
