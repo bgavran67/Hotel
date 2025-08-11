@@ -1,4 +1,5 @@
 using BACKEND.Data;
+using BACKEND.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,56 +12,55 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerGen();
 
-//dodavanje DB contexta
-builder.Services.AddDbContext<EdunovaContext>(o =>
-{
-    o.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure());
+// dodavanje kontaksta baze podataka - dependency injection
+builder.Services.AddDbContext<EdunovaContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"));
 });
 
 
-// Svi se od svuda na sve moguæe naèine mogu spojiti na naš API
+// Svi se od svuda na sve moguce nacine mogu spojiti na naš API
 // èitati https://code-maze.com/aspnetcore-webapi-best-practices/
 
-builder.Services.AddCors(o =>
-{
-    o.AddPolicy("CorsPolicy", p =>
+//  https://levelup.gitconnected.com/cors-finally-explained-simply-ae42b52a70a3
+builder.Services.AddCors(o => {
+
+    o.AddPolicy("CorsPolicy", builder =>
     {
-        p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
 
+// automapper
+builder.Services.AddAutoMapper(cfg => {
+    cfg.AddProfile<HotelMappingProfile>();
+});
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.MapOpenApi();
-}
+
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    // https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/cec1dc005b96b6a3d3962ba063ded2e5b8f9636b/src/Swashbuckle.AspNetCore.SwaggerUI/SwaggerUIOptionsExtensions.cs#L143
-    //options.ConfigObject.TryItOutEnabled = true;
-    options.EnableTryItOutByDefault();
+app.UseSwaggerUI(o => {
+    o.EnableTryItOutByDefault();
+    o.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
 });
 
 
 app.MapControllers();
 
 
-app.UseStaticFiles(); //omoguæi korištenje statiènih datoteka
-app.UseDefaultFiles(); //datoteke se nalaze na wwwroot
-app.MapFallbackToFile("index.html"); //ako neèega nema idi na index.html
-
-
 app.UseCors("CorsPolicy");
+
+// za potrebe produkcije
+app.UseStaticFiles();
+app.UseDefaultFiles();
+app.MapFallbackToFile("index.html");
 
 app.Run();

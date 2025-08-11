@@ -14,5 +14,7 @@ namespace BACKEND.Models
         
         [Column(name: "broj_sobe")]
         public int? BrojSobe { get; set; }
+
+        public ICollection<Gost>? Gosti { get; set; } = [];
     }
 }

@@ -3,16 +3,16 @@ using BACKEND.Data;
 using BACKEND.Models;
 using BACKEND.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
 
 namespace BACKEND.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SobaController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
+    public class RezervacijeController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
     {
         [HttpGet]
-        public ActionResult<List<SobaDTORead>> Get()
+        public ActionResult<List<RezervacijaDTORead>> Get()
         {
             if (!ModelState.IsValid)
             {
@@ -20,7 +20,7 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<SobaDTORead>>(_context.Sobe));
+                return Ok(_mapper.Map<List<RezervacijaDTORead>>(_context.Sobe));
             }
             catch (Exception ex)
             {
@@ -32,16 +32,16 @@ namespace BACKEND.Controllers
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public ActionResult<SobaDTOInsertUpdate> GetBySifra(int sifra)
+        public ActionResult<RezervacijaDTOInsertUpdate> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
-            Soba? e;
+            Rezervacija? e;
             try
             {
-                e = _context.Sobe.Find(sifra);
+                e = _context.Rezervacije.Find(sifra);
             }
             catch (Exception ex)
             {
@@ -49,14 +49,14 @@ namespace BACKEND.Controllers
             }
             if (e == null)
             {
-                return NotFound(new { poruka = "Soba ne postoji u bazi" });
+                return NotFound(new { poruka = "Rezervacija ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<SobaDTOInsertUpdate>(e));
+            return Ok(_mapper.Map<RezervacijaDTOInsertUpdate>(e));
         }
 
         [HttpPost]
-        public IActionResult Post(SobaDTOInsertUpdate dto)
+        public IActionResult Post(RezervacijaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -64,10 +64,10 @@ namespace BACKEND.Controllers
             }
             try
             {
-                var e = _mapper.Map<Soba>(dto);
-                _context.Sobe.Add(e);
+                var e = _mapper.Map<Rezervacija>(dto);
+                _context.Rezervacije.Add(e);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, _mapper.Map<SobaDTORead>(e));
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<RezervacijaDTORead>(e));
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace BACKEND.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, SobaDTOInsertUpdate dto)
+        public IActionResult Put(int sifra, RezervacijaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -89,10 +89,10 @@ namespace BACKEND.Controllers
             }
             try
             {
-                Soba? e;
+                Rezervacija? e;
                 try
                 {
-                    e = _context.Sobe.Find(sifra);
+                    e = _context.Rezervacije.Find(sifra);
                 }
                 catch (Exception ex)
                 {
@@ -100,12 +100,12 @@ namespace BACKEND.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound(new { poruka = "Soba ne postoji u bazi" });
+                    return NotFound(new { poruka = "Rezervacija ne postoji u bazi" });
                 }
 
                 e = _mapper.Map(dto, e);
 
-                _context.Sobe.Update(e);
+                _context.Rezervacije.Update(e);
                 _context.SaveChanges();
 
                 return Ok(new { poruka = "Uspješno promjenjeno" });
@@ -128,10 +128,10 @@ namespace BACKEND.Controllers
             }
             try
             {
-                Soba? e;
+                Rezervacija? e;
                 try
                 {
-                    e = _context.Sobe.Find(sifra);
+                    e = _context.Rezervacije.Find(sifra);
                 }
                 catch (Exception ex)
                 {
@@ -139,9 +139,9 @@ namespace BACKEND.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound("Soba ne postoji u bazi");
+                    return NotFound("Rezervacija ne postoji u bazi");
                 }
-                _context.Sobe.Remove(e);
+                _context.Rezervacije.Remove(e);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
@@ -150,9 +150,6 @@ namespace BACKEND.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
-
-
-
-
     }
 }
+

@@ -12,6 +12,7 @@
 
         public string? Adresa { get; set; }
 
+        public ICollection<Soba>? Sobe { get; set; }
 
 
     }

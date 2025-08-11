@@ -3,16 +3,17 @@ using BACKEND.Data;
 using BACKEND.Models;
 using BACKEND.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace BACKEND.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SobaController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
+    public class PrijevozGostaController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
     {
         [HttpGet]
-        public ActionResult<List<SobaDTORead>> Get()
+        public ActionResult<List<PrijevozGostaDTORead>> Get()
         {
             if (!ModelState.IsValid)
             {
@@ -20,7 +21,7 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<SobaDTORead>>(_context.Sobe));
+                return Ok(_mapper.Map<List<PrijevozGostaDTORead>>(_context.PrijevoziGosta.Include(g => g.Gost)));
             }
             catch (Exception ex)
             {
@@ -30,18 +31,17 @@ namespace BACKEND.Controllers
         }
 
 
-        [HttpGet]
-        [Route("{sifra:int}")]
-        public ActionResult<SobaDTOInsertUpdate> GetBySifra(int sifra)
+        [HttpGet("{sifra:int}")]
+        public ActionResult<PrijevozGostaDTOInsertUpdate> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
-            Soba? e;
+            PrijevozGosta? e;
             try
             {
-                e = _context.Sobe.Find(sifra);
+                e = _context.PrijevoziGosta.Include(g => g.Gost).FirstOrDefault(g => g.Sifra == sifra);
             }
             catch (Exception ex)
             {
@@ -49,39 +49,51 @@ namespace BACKEND.Controllers
             }
             if (e == null)
             {
-                return NotFound(new { poruka = "Soba ne postoji u bazi" });
+                return NotFound(new { poruka = "Prijevoz gosta ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<SobaDTOInsertUpdate>(e));
+            return Ok(_mapper.Map<PrijevozGostaDTOInsertUpdate>(e));
         }
 
         [HttpPost]
-        public IActionResult Post(SobaDTOInsertUpdate dto)
+        public IActionResult Post(PrijevozGostaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
+
+            Gost? es;
             try
             {
-                var e = _mapper.Map<Soba>(dto);
-                _context.Sobe.Add(e);
-                _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, _mapper.Map<SobaDTORead>(e));
+                es = _context.Gosti.Find(dto.GostSifra);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
             }
+            if (es == null)
+            {
+                return NotFound(new { poruka = "Gost na prijevoz gosta ne postoji u bazi" });
+            }
 
-
-
+            try
+            {
+                var e = _mapper.Map<PrijevozGosta>(dto);
+                e.Gost = es;
+                _context.PrijevoziGosta.Add(e);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<PrijevozGostaDTORead>(e));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
-
-        [HttpPut]
+        [HttpPut("{sifra:int}")]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, SobaDTOInsertUpdate dto)
+        public IActionResult Put(int sifra, PrijevozGostaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -89,10 +101,10 @@ namespace BACKEND.Controllers
             }
             try
             {
-                Soba? e;
+                PrijevozGosta? e;
                 try
                 {
-                    e = _context.Sobe.Find(sifra);
+                    e = _context.PrijevoziGosta.Include(g => g.Gost).FirstOrDefault(x => x.Sifra == sifra);
                 }
                 catch (Exception ex)
                 {
@@ -100,12 +112,26 @@ namespace BACKEND.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound(new { poruka = "Soba ne postoji u bazi" });
+                    return NotFound(new { poruka = "Prijevoz gosta ne postoji u bazi" });
+                }
+
+                Gost? es;
+                try
+                {
+                    es = _context.Gosti.Find(dto.GostSifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (es == null)
+                {
+                    return NotFound(new { poruka = "Gost na prijevoz gosta ne postoji u bazi" });
                 }
 
                 e = _mapper.Map(dto, e);
-
-                _context.Sobe.Update(e);
+                e.Gost = es;
+                _context.PrijevoziGosta.Update(e);
                 _context.SaveChanges();
 
                 return Ok(new { poruka = "Uspješno promjenjeno" });
@@ -114,11 +140,9 @@ namespace BACKEND.Controllers
             {
                 return BadRequest(new { poruka = ex.Message });
             }
-
         }
 
-        [HttpDelete]
-        [Route("{sifra:int}")]
+        [HttpDelete("{sifra:int}")]
         [Produces("application/json")]
         public IActionResult Delete(int sifra)
         {
@@ -128,10 +152,10 @@ namespace BACKEND.Controllers
             }
             try
             {
-                Soba? e;
+                PrijevozGosta? e;
                 try
                 {
-                    e = _context.Sobe.Find(sifra);
+                    e = _context.PrijevoziGosta.Find(sifra);
                 }
                 catch (Exception ex)
                 {
@@ -139,9 +163,9 @@ namespace BACKEND.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound("Soba ne postoji u bazi");
+                    return NotFound("Prijevoz gosta ne postoji u bazi");
                 }
-                _context.Sobe.Remove(e);
+                _context.PrijevoziGosta.Remove(e);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
@@ -151,8 +175,7 @@ namespace BACKEND.Controllers
             }
         }
 
-
-
-
     }
+   
 }
+
