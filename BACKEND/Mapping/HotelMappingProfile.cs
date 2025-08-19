@@ -27,9 +27,9 @@ namespace BACKEND.Mapping
 
             /*
             CreateMap<PrijevozGostaDTOInsertUpdate, PrijevozGosta>()
-                .ForMember(dest => dest.Gost, 
+                .ForMember(dest => dest.Gost,
                 opt => opt.Ignore());
-
+            
             // REZERVACIJA
            
             CreateMap<Rezervacija, RezervacijaDTORead>()
@@ -39,7 +39,9 @@ namespace BACKEND.Mapping
                 opt => opt.MapFrom(src => src.Gost.Prezime))
                 .ForCtorParam("GostEmail", 
                 opt => opt.MapFrom(src => src.Gost.Email))
-                .ForCtorParam("TipSobe", 
+                .ForCtorParam("SobaTipSobe", 
+                opt => opt.MapFrom(src => src.Soba.TipSobe));
+                .ForCtorParam("SobaCijena", 
                 opt => opt.MapFrom(src => src.Soba.TipSobe));
 
             CreateMap<RezervacijaDTOInsertUpdate, Rezervacija>()

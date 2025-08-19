@@ -5,7 +5,9 @@
         decimal? UkupnaCijena,
         DateTime? VrijemeDatumPrijave,
         DateTime? VrijemeDatumOdjave,
-        string? GostImePrezimeEmail,
-        string? SobaTipSobeCijena
+        string? GostIme,
+        string? GostPrezime,
+        string? SobaTipSobe,
+        string? SobaCijena
     );
 }
