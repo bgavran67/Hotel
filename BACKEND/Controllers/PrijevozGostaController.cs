@@ -91,7 +91,6 @@ namespace BACKEND.Controllers
             }
         }
         [HttpPut("{sifra:int}")]
-        [Route("{sifra:int}")]
         [Produces("application/json")]
         public IActionResult Put(int sifra, PrijevozGostaDTOInsertUpdate dto)
         {
