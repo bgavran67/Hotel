@@ -2,6 +2,7 @@
 
 namespace BACKEND.Models
 {
+    [Table(name: "prijevoz_gostiju")]
     public class PrijevozGosta : Entitet
     {
         [Column(name: "datum_polaska")]

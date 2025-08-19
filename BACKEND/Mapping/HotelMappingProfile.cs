@@ -18,17 +18,20 @@ namespace BACKEND.Mapping
             CreateMap<SobaDTOInsertUpdate, Soba>();
 
             // PRIJEVOZ GOSTA
+            
             CreateMap<PrijevozGosta, PrijevozGostaDTORead>()
                 .ForCtorParam("GostIme", 
                 opt => opt.MapFrom(src => src.Gost.Ime))
                 .ForCtorParam("GostPrezime", 
                 opt => opt.MapFrom(src => src.Gost.Prezime));
 
+            /*
             CreateMap<PrijevozGostaDTOInsertUpdate, PrijevozGosta>()
                 .ForMember(dest => dest.Gost, 
                 opt => opt.Ignore());
 
             // REZERVACIJA
+           
             CreateMap<Rezervacija, RezervacijaDTORead>()
                 .ForCtorParam("GostIme", 
                 opt => opt.MapFrom(src => src.Gost.Ime))
@@ -46,6 +49,7 @@ namespace BACKEND.Mapping
                 opt => opt.Ignore());
 
 
+            */
 
         }
     }

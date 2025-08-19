@@ -9,7 +9,8 @@
         string? LokacijaPolazista,
         string? Dostupnost,
         int? BrojPutnika,
-        string? GostImePrezimeEmail
+        string? GostIme,
+        string? GostPrezime
     );
     
 }
