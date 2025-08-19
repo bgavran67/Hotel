@@ -12,7 +12,7 @@ namespace BACKEND.Controllers
     [Route("api/v1/[controller]")]
     public class GostController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
     {
-        [HttpGet("{sifra:int}")]
+        [HttpGet]
         public ActionResult<List<GostDTORead>> Get()
         {
             if (!ModelState.IsValid)
@@ -79,7 +79,6 @@ namespace BACKEND.Controllers
         }
 
         [HttpPut("{sifra:int}")]
-        [Route("{sifra:int}")]
         [Produces("application/json")]
         public IActionResult Put(int sifra, GostDTOInsertUpdate dto)
         {
@@ -119,7 +118,7 @@ namespace BACKEND.Controllers
 
 
 
-        [HttpDelete("{sifra:int}")]
+        [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]
         public IActionResult Delete(int sifra)
