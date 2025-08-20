@@ -1,5 +1,8 @@
-﻿namespace BACKEND.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BACKEND.Models
 {
+    [Table(name: "gosti")]
     public class Gost : Entitet
     {
 

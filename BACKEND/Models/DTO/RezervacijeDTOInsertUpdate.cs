@@ -4,7 +4,7 @@
          decimal? UkupnaCijena,
          DateTime? VrijemeDatumPrijave,
          DateTime? VrijemeDatumOdjave,
-         int? GostSifra,
-         int? SobaSifra
+         int? Gost,
+         int? Soba
      );
 }

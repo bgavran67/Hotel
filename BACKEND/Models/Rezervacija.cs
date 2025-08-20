@@ -13,16 +13,13 @@ namespace BACKEND.Models
         [Column(name: "vrijeme_datum_odjave")]
         public DateTime? VrijemeDatumOdjave { get; set; }
 
+        [Column("gost")]
         public int GostSifra { get; set; }
+        public required Gost Gost { get; set; }
 
-        
-        [ForeignKey("GostSifra")]
-        public Gost Gost { get; set; }
+        [Column("soba")]
         public int SobaSifra { get; set; }
-
-        
-        [ForeignKey("SobaSifra")]
-        public Soba Soba { get; set; }
+        public required Soba Soba { get; set; }
     }
 }
 

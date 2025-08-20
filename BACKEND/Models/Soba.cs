@@ -2,6 +2,7 @@
 
 namespace BACKEND.Models
 {
+    [Table(name: "sobe")]
     public class Soba : Entitet
     {
         [Column(name:"tip_sobe")] //ako zelim promjeniti naziv radim ovako --> [Column(name"izmjena")]

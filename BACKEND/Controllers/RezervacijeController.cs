@@ -20,7 +20,12 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<RezervacijaDTORead>>(_context.Sobe));
+                return Ok(_mapper.Map<List<RezervacijaDTORead>>(
+                    _context.Rezervacije
+                        .Include(r => r.Gost)
+                        .Include(r => r.Soba)
+                        .ToList()
+                ));
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@
         DateTime? VrijemeDatumOdjave,
         string? GostIme,
         string? GostPrezime,
+        string? GostEmail,
         string? SobaTipSobe,
         string? SobaCijena
     );
