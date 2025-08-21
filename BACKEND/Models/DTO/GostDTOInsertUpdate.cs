@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BACKEND.Models.DTO
 {
+    
     public record GostDTOInsertUpdate(
         [Required(ErrorMessage = "Ime obavezno")]
         string? Ime,

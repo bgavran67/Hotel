@@ -9,7 +9,7 @@ namespace BACKEND.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SobaController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
+    public class SobeController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
     {
         [HttpGet]
         public ActionResult<List<SobaDTORead>> Get()
@@ -20,7 +20,9 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<SobaDTORead>>(_context.Sobe));
+                var sobe = _context.Sobe.ToList();
+
+                return Ok(_mapper.Map<List<SobaDTORead>>(sobe));
             }
             catch (Exception ex)
             {

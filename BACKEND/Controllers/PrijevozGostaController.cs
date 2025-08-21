@@ -21,7 +21,7 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<PrijevozGostaDTORead>>(_context.PrijevoziGosta.Include(g => g.Gost)));
+                return Ok(_mapper.Map<List<PrijevozGostaDTORead>>(_context.PrijevoziGosta.Include(g => g.Gost).ToList()));
             }
             catch (Exception ex)
             {

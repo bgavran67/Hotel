@@ -1,5 +1,6 @@
 ﻿namespace BACKEND.Models.DTO
 {
+
     public record SobaDTORead(
        int Sifra,
        string? TipSobe,

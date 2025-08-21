@@ -37,15 +37,15 @@ builder.Services.AddAutoMapper(cfg => {
 
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-    app.MapOpenApi();
-
-
+ 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
+// Configure the HTTP request pipeline.
+app.MapOpenApi();
 app.UseSwagger();
 app.UseSwaggerUI(o => {
     o.EnableTryItOutByDefault();
@@ -56,7 +56,7 @@ app.UseSwaggerUI(o => {
 app.MapControllers();
 
 
-app.UseCors("CorsPolicy");
+
 
 // za potrebe produkcije
 app.UseStaticFiles();

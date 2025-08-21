@@ -21,7 +21,8 @@ namespace BACKEND.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<GostDTORead>>(_context.Gosti));
+                var gosti = _context.Gosti.ToList();
+                return Ok(_mapper.Map<List<GostDTORead>>(gosti));
             }
             catch (Exception ex)
             {

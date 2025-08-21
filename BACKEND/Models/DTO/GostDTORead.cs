@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BACKEND.Models.DTO
 {
-    
-        public record GostDTORead(
+   
+    public record GostDTORead(
         int Sifra,
         string? Ime,
         string? Prezime,
