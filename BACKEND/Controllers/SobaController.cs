@@ -9,7 +9,7 @@ namespace BACKEND.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SobeController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
+    public class SobaController(EdunovaContext context, IMapper mapper) : HotelController(context, mapper)
     {
         [HttpGet]
         public ActionResult<List<SobaDTORead>> Get()
