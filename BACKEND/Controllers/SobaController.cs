@@ -3,6 +3,7 @@ using BACKEND.Data;
 using BACKEND.Models;
 using BACKEND.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 namespace BACKEND.Controllers
@@ -58,7 +59,7 @@ namespace BACKEND.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(SobaDTOInsertUpdate dto)
+        public IActionResult Post(int sifra, SobaDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -133,15 +134,25 @@ namespace BACKEND.Controllers
                 Soba? e;
                 try
                 {
-                    e = _context.Sobe.Find(sifra);
+                    e = _context.Sobe.Include(s => s.Rezervacije ).FirstOrDefault(x => x.Sifra == sifra);
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(new { poruka = ex.Message });
+                    return BadRequest(new { poruka = ex.Message,
+                        inner = ex.InnerException?.Message
+                    });
                 }
                 if (e == null)
                 {
                     return NotFound("Soba ne postoji u bazi");
+                }
+                if (e.Rezervacije.Count > 0)
+                {
+                    return BadRequest(new
+                    {
+                        poruka = "Ne može se obrisati",
+                        inner = "Soba je na određenim rezervacijama"
+                    });
                 }
                 _context.Sobe.Remove(e);
                 _context.SaveChanges();
@@ -149,7 +160,9 @@ namespace BACKEND.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { poruka = ex.Message });
+                return BadRequest(new { poruka = ex.Message,
+                    inner = ex.InnerException?.Message
+                });
             }
         }
 

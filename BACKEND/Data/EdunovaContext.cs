@@ -24,6 +24,10 @@ namespace BACKEND.Data
             // implementacija veze 1:n
             modelBuilder.Entity<PrijevozGosta>().HasOne(g => g.Gost);
 
+            modelBuilder.Entity<Rezervacija>().HasOne(g => g.Gost);
+
+            modelBuilder.Entity<Rezervacija>().HasOne(g => g.Soba);
+
             // implementacija veze n:n
             modelBuilder.Entity<Gost>()
                 .HasMany(g => g.Sobe)
@@ -33,6 +37,9 @@ namespace BACKEND.Data
                 c => c.HasOne<Gost>().WithMany().HasForeignKey("gost"),
                 c => c.ToTable("rezervacije")
                 );
+
+            modelBuilder.Entity<Soba>()
+                .HasMany(s => s.Rezervacije);
 
         }
 

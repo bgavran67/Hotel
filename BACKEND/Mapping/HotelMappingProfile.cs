@@ -12,10 +12,12 @@ namespace BACKEND.Mapping
         {
             CreateMap<Gost, GostDTORead>();
             CreateMap<GostDTOInsertUpdate, Gost>();
+            CreateMap<Gost, GostDTOInsertUpdate>();
 
             // SOBA
             CreateMap<Soba, SobaDTORead>();
             CreateMap<SobaDTOInsertUpdate, Soba>();
+            CreateMap<Soba, SobaDTOInsertUpdate>();
 
             // PRIJEVOZ GOSTA
             
@@ -51,9 +53,13 @@ namespace BACKEND.Mapping
                 opt => opt.Ignore())
                 .ForMember(dest => dest.Soba, 
                 opt => opt.Ignore());
-            
 
-            
+            CreateMap<Rezervacija, RezervacijaDTOInsertUpdate>()
+            .ForMember(dest => dest.Gost,
+                opt => opt.Ignore())
+                .ForMember(dest => dest.Soba,
+                opt => opt.Ignore());
+
 
         }
     }

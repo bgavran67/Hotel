@@ -17,5 +17,7 @@ namespace BACKEND.Models
         public int? BrojSobe { get; set; }
 
         public ICollection<Gost>? Gosti { get; set; } = [];
+
+        public ICollection<Rezervacija> Rezervacije { get; set; } = [];
     }
 }
