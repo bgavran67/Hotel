@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import SobeService from "../../services/SobeService";
 import { NumericFormat } from "react-number-format";
@@ -8,30 +8,39 @@ import { RouteNames } from "../../constants";
 
 export default function SobePregled(){
 
-    const[sobe, setSobe] = useState([]);
     const navigate = useNavigate();
+    const[sobe, setSobe] = useState([]);
+
 
     async function dohvatiSobe() {
-        const odgovor = await SobeService.get()
-        setSobe(odgovor)
+        const odgovor = await SobeService.get();
+        if(odgovor.greska){
+            alert(odgovor.poruka)
+            return
+        }
+        setSobe(odgovor.poruka)
+        
     }
 
-    //hook ili kuka se izvodi prilikom dolaska na straniuc Sobe
-    //ovo "glumi" konstruktor u OOP
-    useEffect(()=>
-        {
-         dohvatiSobe();
+    //hook ili kuka se izvodi prilikom dolaska na stranicu Sobe
+    useEffect(()=>{
+        dohvatiSobe();
     },[])
+
 
     function obrisi(sifra){
         if(!confirm('Sigurno obrisati')){
             return;
         }
-        brisanje(sifra)
+        brisanjeSobe(sifra)
     }
 
-    async function brisanje(sifra) {
-        const odgovor = await SobeService.obrisi(sifra);
+    async function brisanjeSobe(sifra) {
+        const odgovor = await SobeService.brisanje(sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka)
+            return
+        }
         dohvatiSobe();
     }
 
@@ -41,9 +50,8 @@ export default function SobePregled(){
     return(
         <>
         
-        <Link 
-        className="btn btn-success"
-        to={RouteNames.SOBA_NOVI} >Dodavanje nove sobe</Link>
+        <Link to={RouteNames.SOBA_NOVI}
+        className="btn btn-success siroko">Dodaj novu sobu </Link>
 
         
         <Table striped bordered hover responsive>
@@ -63,46 +71,56 @@ export default function SobePregled(){
 
                 {sobe && sobe.map((soba,index)=>(
                     <tr key={index}>
-                        <td>{soba.tipSobe}</td>
-                        <td className="desno">
-                            <NumericFormat
-                            value={soba.cijena}
-                            displayType={'text'}
-                            thousandSeparator='.'
-                            decimalSeparator=','
-                            suffix={' €'}
-                            decimalScale={2}
-                            fixedDecimalScale
-                            />
-                        </td>
 
-                        <td>{soba.dostupnost}</td>
-                        {/* <td className="sredina">
-                            <GrValidate 
-                            size={30}
-                            color={sobe.dostupnost ? 'green' : 'red'}
-                            title={sobe.dostupnost ? 'DA' : 'NE'}
+                    <td> 
+                        {soba.tipSobe}
+                    </td>
+
+                   
+                    
+                    <td className={soba.cijena==null ? 'sredina' : 'desno'}>
+                        {soba.cijena=null ? 'Nije definirano' : 
+                        <NumericFormat 
+                        value = {soba.cijena}
+                        displayType={'text'}
+                        thousandSeparator='.'
+                        decimalSeparator=','
+                        prefix={'€'}
+                        decimalScale={2}
+                        fixedDecimalScale
+                        />
+
+             }    
                         
-                            />
-                            
-                        </td> */}
+                    </td>
+                    
+                     <td> {soba.dostupnost}</td>
 
-                        <td>{soba.brojSobe}</td>
+                    <td>{soba.brojSobe}</td>
+                   
 
-                        <td>
+                <td> 
 
-                            
-                            
                             <Button 
-                                onClick={()=>navigate(`/sobe/${soba.sifra}`)}>
-                                Promjena
+                                variant="danger"
+                                onClick={()=>obrisi(soba.sifra)}
+                                >
+                                    Obriši
                             </Button>
                             &nbsp;&nbsp;&nbsp;&nbsp;
 
-                            <Button variant="danger"
-                                onClick={()=>obrisi(soba.sifra)}>
-                                Obriši
+                            <Button 
+                                onClick={()=>navigate(`/Sobe/${soba.sifra}`)}
+                                
+                            >
+
+                            Promjena    
                             </Button>
+
+
+                            
+
+
 
                         </td>
 

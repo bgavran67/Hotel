@@ -6,55 +6,57 @@ import { useEffect, useState } from "react";
 
 export default function SobePromjena()
 {
-    const navigate = useNavigate()
-    const params = useParams()
-    const [soba,setSoba]=useState({})
-    
+   const [soba,setSoba] = useState({})
+   const navigate = useNavigate()
+   const routeParams = useParams()
 
-    async function ucitajSobu() {
-        const odgovor = await SobeService.getBySifra(params.sifra)
-       // za datum dodajemo - odgovor.datumPokretanja = moment.utc(odgovor.datumPokretanja).format('yyyy-MM-DD')
-        setSoba(odgovor)
-        //setAktivan(odgovor.aktivan)  za boolean pri promjeni
+   async function dohvatiSobu(){
+    const odgovor = await SobeService.getBySifra(routeParams.sifra);
+
+    if (odgovor.greska){
+        alert(odgovor.poruka)
+        return
     }
+
+   }
 
     useEffect(()=>{
-        ucitajSobu()
+        dohvatiSobu();
     },[])
 
-    async function promjena(sifra, soba){
-        const odgovor = await SobeService.promjeni(sifra, soba);
-        navigate(RouteNames.SOBA_PREGLED);
+    async function promjena(soba){
+        const odgovor = await SobeService.promjena(routeParams.sifra,soba)
+        if(odgovor.greska){
+            alert(odgovor.poruka)
+            return;
+        }
     }
 
 
-
-    function odradiSubmit(e){
+    function obradiSubmit(e){
         e.preventDefault();
+        let podaci = new FormData(e.target)
 
-        let podaci = new FormData(e.target); //dohvaćamo sve podatke iz forme
-
-        promjena(
-            params.sifra,
-            {
+        promjena({
             tipSobe: podaci.get('tipSobe'),
             cijena: parseFloat(podaci.get('cijena')),
             dostupnost: podaci.get('dostupnost'),
             brojSobe: parseFloat(podaci.get('brojSobe'))
-            }
+            
 
             //za bool - podaci.get('dostupan')=='on'
             //datum - moment.utc(podaci.get(('datumPokretanja')))
-        )
+
+        })
     }
 
 
     return(
         <>
         
-        Dodavanje sobe
+        Promjena sobe
         
-        <Form onSubmit={odradiSubmit}>
+        <Form onSubmit={obradiSubmit}>
 
         <Form.Group controlId="tip sobe">
 
@@ -72,7 +74,7 @@ export default function SobePromjena()
 
         <Form.Group controlId="dostupnost">
 
-            <Form.Label>Dostupan</Form.Label>
+            <Form.Label>Dostupnost</Form.Label>
             <Form.Control type="text" name="dostupnost" required
             defaultValue = {soba.dostupnost}/>
         </Form.Group>
@@ -90,19 +92,18 @@ export default function SobePromjena()
         {/* za datum i vrijeme stavljamo type: date-local
         za bool tip <Form.Check (umjesto control) label="Dostupan" name="Dostupan" /> */}
 
-        <Row> 
-            <Col xs={6} s={6} m={3} lg={2} xl={6} xxl={6}>
-            <Link to={RouteNames.SOBA_PREGLED}
-            className="btn btn-danger">Odustani</Link>
+        <Row className="akcije">
+            <Col xs={6} sm={12} md={3} lg={6} xl={6} xxl={6}>
+            <Link to={RouteNames.SOBA_PREGLED} 
+            className="btn btn-danger siroko">Odustani</Link>
             </Col>
-
-            <Col xs={6} s={6} m={3} lg={2} xl={6} xxl={6}>
-            <Button variant="success" type="submit">
-                Promjeni sobu
-            </Button>
+            <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
+            <Button variant="success"
+            type="submit"
+            className="siroko">Promjeni sobu</Button>
             </Col>
-
         </Row>
+
 
         </Form>
 

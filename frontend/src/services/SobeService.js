@@ -6,48 +6,81 @@ async function get() {
     // sve je u redu, dobili smo odgovor
     .then((odgovor)=>{
         //console.log(odgovor.data)
-        return odgovor.data
+        return{greska: false, poruka: odgovor.data}
     })
     // nastala je greška, obradi ju
-    .catch((e)=>{})
+    .catch((e)=>{
+        return {greska: true, poruka: 'Problem kod dohvaćanja soba' }
+    })
 }
 
-async function getBySifra(sifra){
-return await HttpService.get('/Soba/' + sifra)
+async function brisanje(sifra){
+return await HttpService.delete('/Soba/' + sifra)
 //sve je u redu, dobili smo odgovor
 .then((odgovor)=>{
     // console.log(odgovor.data)
-    return odgovor.data
+    return {greska: false, poruka: 'Obrisano'}
 })
-
-//nastala je greška, obradi ju!
-.catch((e)=>{})
+.catch(()=>{
+    return {greska: true, poruka: 'Problem kod brisanja sobe'}
+})
 }
+
 
 async function dodaj(soba) {
     return await HttpService.post('/Soba',soba)
-    .then((odgovor)=>{return true})
-    .catch((e)=>{return false})
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{
+        switch (e.status){
+            case 400:
+                let poruke='';
+                for(const kljuc in e.reposnse.data.errors){
+                    poruke += kljuc + ': ' + e.reposnse.data.errors[kljuc][0] + '\n';
+                }
+                return {greska: true, poruka: poruke}
+                default: return {greska: true, poruka: 'Soba se ne može dodati!'}
+        }
+    })
 }
 
-async function obrisi(sifra) {
-    return await HttpService.delete('/Soba/'+sifra)
-    .then((odgovor)=>{return true})
-    .catch((e)=>{return false})
+async function promjena(sifra,soba){
+    return await HttpService.put('/Soba/' + sifra,soba)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{
+        switch (e.status) {
+            case 400:
+                let poruke='';
+                for(const kljuc in e.response.data.errors){
+                    poruke += kljuc + ': ' + e.response.data.errors[kljuc][0] + '\n';
+                }
+                console.log(poruke)
+                return {greska: true, poruka: poruke}
+            default:
+                return {greska: true, poruka: 'Soba se ne može promjeniti!'}
+        }
+    })
 }
 
-async function promjeni(sifra,soba) {
-    return await HttpService.put('/Soba/'+sifra, soba)
-    .then((odgovor)=>{return true})
-    .catch((e)=>{return false})
+async function getBySifra(sifra){
+    return await HttpService.get('/Soba/'+sifra)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{
+        return {greska: true, poruka: 'Problem kod dohvaćanja sobe sa šifrom '+sifra}   
+    })
 }
 
 
 export default{
     get,
-    getBySifra,
+    brisanje,
     dodaj,
-    obrisi,
-    promjeni
+    getBySifra,
+    promjena
 }
 

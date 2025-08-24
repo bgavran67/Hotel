@@ -10,16 +10,13 @@ export default function NavBarEdunova() {
 
     const navigate = useNavigate()
 
-
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
         <Navbar.Brand className='ruka' onClick={()=>navigate(RouteNames.HOME)}>Hotel</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            
-            <Nav.Link href="#link">Početna</Nav.Link>
+  
             <NavDropdown title="Programi" id="basic-nav-dropdown">
               <NavDropdown.Item 
                 onClick={()=>navigate(RouteNames.SOBA_PREGLED)}>
@@ -29,7 +26,6 @@ export default function NavBarEdunova() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 }
