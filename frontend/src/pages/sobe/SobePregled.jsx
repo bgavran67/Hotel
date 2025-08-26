@@ -79,7 +79,7 @@ export default function SobePregled(){
                    
                     
                     <td className={soba.cijena==null ? 'sredina' : 'desno'}>
-                        {soba.cijena=null ? 'Nije definirano' : 
+                        {soba.cijena==null ? 'Nije definirano' : 
                         <NumericFormat 
                         value = {soba.cijena}
                         displayType={'text'}

@@ -5,20 +5,22 @@ export const RouteNames = {
 
     SOBA_PREGLED: '/sobe', // ovo je ruta na frontendu
     SOBA_NOVI: '/sobe/dodaj',
-    SOBA_PROMJENA: '/sobe/:sifra'
+    SOBA_PROMJENA: '/sobe/:sifra',
 
-    /*ovdje dodati ostalo
-    GOST_PREGLED: '/gosti',
-    GOST_NOVI: '/gosti/dodaj',
-    GOST_PROMJENA: '/gosti/:sifra'
+    PRIJEVOZ_GOSTA_PREGLED: '/prijevozgosta'
 
+    // GOST_PREGLED: '/gosti',
+    // GOST_NOVI: '/gosti/dodaj',
+    // GOST_PROMJENA: '/gosti/:sifra'
+
+    /*ovdje dodati ostalo kasnije
     REZERVACIJA_PREGLED: '/rezervacije',
     REZERVACIJA_NOVI: '/rezervacije/dodaj',
     REZERVACIJA_PROMJENA: '/rezervacije/:sifra'
 
-    PRIJEVOZ_GOSTA_PREGLED: '/prijevoz-gosta',
-    PRIJEVOZ_GOSTA_NOVI: '/prijevoz-gosta/dodaj',
-    PRIJEVOZ_GOSTA_PROMJENA: '/prijevoz-gosta/:sifra'
+    
+    PRIJEVOZ_GOSTA_NOVI: '/prijevozgosta/dodaj',
+    PRIJEVOZ_GOSTA_PROMJENA: '/prijevozgosta/:sifra'
     */
 }
 
