@@ -26,8 +26,8 @@ return await HttpService.delete('/Gost/' + sifra)
 }
 
 
-async function dodaj(gosta) {
-    return await HttpService.post('/Gost',soba)
+async function dodaj(gost) {
+    return await HttpService.post('/Gost', gost)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
@@ -44,8 +44,8 @@ async function dodaj(gosta) {
     })
 }
 
-async function promjena(sifra,soba){
-    return await HttpService.put('/Soba/' + sifra,soba)
+async function promjena(sifra,gost){
+    return await HttpService.put('/Gost/' + sifra,gost)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
@@ -59,18 +59,18 @@ async function promjena(sifra,soba){
                 console.log(poruke)
                 return {greska: true, poruka: poruke}
             default:
-                return {greska: true, poruka: 'Soba se ne može promjeniti!'}
+                return {greska: true, poruka: 'Gost se ne može promjeniti!'}
         }
     })
 }
 
 async function getBySifra(sifra){
-    return await HttpService.get('/Soba/'+sifra)
+    return await HttpService.get('/Gost/'+sifra)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
     .catch((e)=>{
-        return {greska: true, poruka: 'Problem kod dohvaćanja sobe sa šifrom '+sifra}   
+        return {greska: true, poruka: 'Problem kod dohvaćanja gosta sa šifrom '+sifra}   
     })
 }
 

@@ -38,8 +38,8 @@ export default function PrijevoziGostaDodaj() {
     const podaci = new FormData(e.target);
 
     dodaj({
-      datumPolaska: moment.utc(podaci.get('datumPolaska')).format(),
-      datumOdlaska: moment.utc(podaci.get('datumOdlaska')).format(),
+      datumPolaska: moment.utc(podaci.get('datumPolaska')),
+      datumOdlaska: moment.utc(podaci.get('datumOdlaska')),
       vrstaPrijevoza: podaci.get('vrstaPrijevoza'),
       lokacijaPolazista: podaci.get('lokacijaPolazista'),
       dostupnost: podaci.get('dostupnost'),
@@ -52,11 +52,12 @@ export default function PrijevoziGostaDodaj() {
     <>
       <h4>Dodavanje novog prijevoza gosta</h4>
       <Form onSubmit={obradiSubmit}>
+
         <Form.Label>Datum Polaska</Form.Label>
-        <Form.Control type="date-local" name="datumPolaska" />
+        <Form.Control type="date" name="datumPolaska" />
 
         <Form.Label>Datum Odlaska</Form.Label>
-        <Form.Control type="date-local" name="datumOdlaska"  />
+        <Form.Control type="date" name="datumOdlaska"  />
 
         <Form.Label>Vrsta Prijevoza</Form.Label>
         <Form.Control type="text" name="vrstaPrijevoza"  />
@@ -78,7 +79,7 @@ export default function PrijevoziGostaDodaj() {
           >
             {gosti && gosti.map((s,index)=>(
               <option key={index} value={s.sifra}>
-                {s.naziv}
+                {s.ime} {s.prezime}
               </option>
             ))}
           </Form.Select>

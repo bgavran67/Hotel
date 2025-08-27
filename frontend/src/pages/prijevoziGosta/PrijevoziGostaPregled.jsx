@@ -11,13 +11,13 @@ export default function PrijevoziGostaPromjena(){
     let navigate = useNavigate(); 
 
     async function dohvatiPrijevozeGosta(){
-        await Service.get()
-        .then((odgovor)=>{
-            //console.log(odgovor);
-            setPrijevoziGosta(Array.isArray(odgovor));
-
-        })
-        .catch((e)=>{console.log(e)});
+        const odgovor = await Service.get();
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        // console.log(odgovor.poruka);
+        setPrijevoziGosta(odgovor.poruka);
     }
 
     async function obrisiPrijevozGosta(sifra) {
@@ -60,13 +60,13 @@ export default function PrijevoziGostaPromjena(){
                 <tbody>
                     {prijevoziGosta && prijevoziGosta.map((entitet,index)=>(
                         <tr key={index}>
-                            <td>{entitet.datumDolaska}</td>
+                            <td>{entitet.datumPolaska}</td>
                             <td>{entitet.datumOdlaska}</td>
                             <td>{entitet.vrstaPrijevoza}</td>
                             <td>{entitet.lokacijaPolazista}</td>
                             <td>{entitet.dostupnost}</td>
                             <td>{entitet.brojPutnika}</td>
-                            <td>{entitet.gost.ime} {entitet.gost.prezime}</td>
+                            <td>{entitet.gostIme} {entitet.gostPrezime}</td>
 
 
                             <td className="sredina">

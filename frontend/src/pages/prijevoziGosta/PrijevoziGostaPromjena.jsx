@@ -75,10 +75,10 @@ export default function PrijevoziGostaPromjena(){
 
           <Form onSubmit={obradiSubmit}>
             <Form.Label>Datum Polaska</Form.Label>
-            <Form.Control type="date-local" name="datumPolaska" required defaultValue={prijevozGosta.datumPolaska}/>
+            <Form.Control type="date" name="datumPolaska" required defaultValue={prijevozGosta.datumPolaska}/>
             
             <Form.Label>Datum Odlaska</Form.Label>
-            <Form.Control type="date-local" name="datumOdlaska" required defaultValue={prijevozGosta.datumOdlaska}/>
+            <Form.Control type="date" name="datumOdlaska" required defaultValue={prijevozGosta.datumOdlaska}/>
             
             <Form.Label>Vrsta Prijevoza</Form.Label>
             <Form.Control type="text" name="vrstaPrijevoza" required defaultValue={prijevozGosta.vrstaPrijevoza}/>

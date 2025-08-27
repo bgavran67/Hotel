@@ -9,12 +9,12 @@ export const RouteNames = {
 
     PRIJEVOZ_GOSTA_PREGLED: '/prijevozgosta',
     PRIJEVOZ_GOSTA_NOVI: '/prijevozgosta/dodaj',
-    PRIJEVOZ_GOSTA_PROMJENA: '/prijevozgosta/:sifra'
+    PRIJEVOZ_GOSTA_PROMJENA: '/prijevozgosta/:sifra',
 
     
-    // GOST_PREGLED: '/gosti',
-    // GOST_NOVI: '/gosti/dodaj',
-    // GOST_PROMJENA: '/gosti/:sifra'
+    GOST_PREGLED: '/gosti',
+    GOST_NOVI: '/gosti/dodaj',
+    GOST_PROMJENA: '/gosti/:sifra'
 
     /*ovdje dodati ostalo kasnije
     REZERVACIJA_PREGLED: '/rezervacije',

@@ -11,6 +11,10 @@ import SobePromjena from './pages/sobe/SobePromjena'
 import PrijevoziGostaPregled from './pages/prijevoziGosta/PrijevoziGostaPregled'
 import PrijevoziGostaDodaj from './pages/prijevoziGosta/PrijevoziGostaDodaj'
 import PrijevoziGostaPromjena from './pages/prijevoziGosta/PrijevoziGostaPromjena'
+import GostiPregled from './pages/gosti/GostiPregled'
+import GostiPromjena from './pages/gosti/GostiPromjena'
+import GostiDodaj from './pages/gosti/GostiDodaj'
+
 
 function App() {
   
@@ -30,6 +34,10 @@ function App() {
   <Route path={RouteNames.PRIJEVOZ_GOSTA_PREGLED} element={<PrijevoziGostaPregled />} />
   <Route path={RouteNames.PRIJEVOZ_GOSTA_NOVI} element={<PrijevoziGostaDodaj />} />
   <Route path={RouteNames.PRIJEVOZ_GOSTA_PROMJENA} element={<PrijevoziGostaPromjena />} />
+
+  <Route path={RouteNames.GOST_PREGLED} element={<GostiPregled />} />
+  <Route path={RouteNames.GOST_NOVI} element={<GostiDodaj />} />
+  <Route path={RouteNames.GOST_PROMJENA} element={<GostiPromjena />} />
 
       </Routes>
       </Container>
