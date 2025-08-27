@@ -22,7 +22,10 @@ export default function NavBarEdunova() {
                 onClick={()=>navigate(RouteNames.SOBA_PREGLED)}>
                 Sobe
               </NavDropdown.Item>
-              
+              <NavDropdown.Item 
+                onClick={()=>navigate(RouteNames.PRIJEVOZ_GOSTA_PREGLED)}>
+                Prijevozi gosta
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

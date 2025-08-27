@@ -60,7 +60,7 @@ async function promjena(sifra,prijevozGosta){
                 console.log(poruke)
                 return {greska: true, poruka: poruke}
             default:
-                return {greska: true, poruka: 'PrijevozGosta se ne može promjeniti!'}
+                return {greska: true, poruka: 'Prijevoz gosta se ne može promjeniti!'}
         }
     })
 }

@@ -8,6 +8,9 @@ import Pocetna from './pages/Pocetna'
 import SobePregled from './pages/sobe/SobePregled'
 import SobeDodaj from './pages/sobe/SobeDodaj'
 import SobePromjena from './pages/sobe/SobePromjena'
+import PrijevoziGostaPregled from './pages/prijevoziGosta/PrijevoziGostaPregled'
+import PrijevoziGostaDodaj from './pages/prijevoziGosta/PrijevoziGostaDodaj'
+import PrijevoziGostaPromjena from './pages/prijevoziGosta/PrijevoziGostaPromjena'
 
 function App() {
   
@@ -23,6 +26,11 @@ function App() {
         <Route path={RouteNames.SOBA_PREGLED} element={<SobePregled />} />
         <Route path={RouteNames.SOBA_NOVI} element={< SobeDodaj />} /> 
     <Route path={RouteNames.SOBA_PROMJENA} element={< SobePromjena />} /> 
+
+  <Route path={RouteNames.PRIJEVOZ_GOSTA_PREGLED} element={<PrijevoziGostaPregled />} />
+  <Route path={RouteNames.PRIJEVOZ_GOSTA_NOVI} element={<PrijevoziGostaDodaj />} />
+  <Route path={RouteNames.PRIJEVOZ_GOSTA_PROMJENA} element={<PrijevoziGostaPromjena />} />
+
       </Routes>
       </Container>
       

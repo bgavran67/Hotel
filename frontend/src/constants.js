@@ -7,8 +7,11 @@ export const RouteNames = {
     SOBA_NOVI: '/sobe/dodaj',
     SOBA_PROMJENA: '/sobe/:sifra',
 
-    PRIJEVOZ_GOSTA_PREGLED: '/prijevozgosta'
+    PRIJEVOZ_GOSTA_PREGLED: '/prijevozgosta',
+    PRIJEVOZ_GOSTA_NOVI: '/prijevozgosta/dodaj',
+    PRIJEVOZ_GOSTA_PROMJENA: '/prijevozgosta/:sifra'
 
+    
     // GOST_PREGLED: '/gosti',
     // GOST_NOVI: '/gosti/dodaj',
     // GOST_PROMJENA: '/gosti/:sifra'
@@ -19,8 +22,8 @@ export const RouteNames = {
     REZERVACIJA_PROMJENA: '/rezervacije/:sifra'
 
     
-    PRIJEVOZ_GOSTA_NOVI: '/prijevozgosta/dodaj',
-    PRIJEVOZ_GOSTA_PROMJENA: '/prijevozgosta/:sifra'
+    
+   
     */
 }
 
