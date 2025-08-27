@@ -1,14 +1,49 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { RouteNames } from "../../constants";
+import { GOOGLE_MAPS_API, RouteNames } from "../../constants";
 import { useEffect, useState } from "react";
 import GostiService from "../../services/GostiService";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
 
 export default function GostiPromjena()
 {
-   const [gost, setGost] = useState({})
+
+    const [gost, setGost] = useState({})
    const navigate = useNavigate()
    const routeParams = useParams()
+
+    useEffect(()=>{
+        dohvatiGosta();
+    },[])
+
+
+   const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: GOOGLE_MAPS_API
+  });
+
+  // Prikazujemo poruku o grešci ako postoji
+  if (loadError) {
+    return <div>Greška pri učitavanju karte</div>;
+  }
+
+  // Prikazujemo poruku o učitavanju dok skripta nije spremna
+  if (!isLoaded) {
+    return <div>Učitavanje...</div>;
+  }
+
+
+const containerStyle = {
+  width: '20vw',
+  height: '50vh'
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523,
+}
+
+        
 
    async function dohvatiGosta(){
     const odgovor = await GostiService.getBySifra(routeParams.sifra);
@@ -20,9 +55,7 @@ export default function GostiPromjena()
 
    }
 
-    useEffect(()=>{
-        dohvatiGosta();
-    },[])
+   
 
     async function promjena(gost){
         const odgovor = await GostiService.promjena(routeParams.sifra,gost)
@@ -33,7 +66,7 @@ export default function GostiPromjena()
     }
 
 
-     function obradiSubmit(e){
+     function odradiSubmit(e){
         e.preventDefault();
         let podaci = new FormData(e.target)
 
@@ -49,15 +82,14 @@ export default function GostiPromjena()
 
         })
     }
-        
-
 
     return(
         <>
         
         Promjena gosta
-        
-        <Form onSubmit={odradiSubmit}>
+         <Row>
+        <Col key='1' sm={12} lg={6} md={6}>
+         <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="ime">
 
@@ -115,6 +147,19 @@ export default function GostiPromjena()
 
 
         </Form>
+        </Col>
+        <Col key='2' sm={12} lg={6} md={6}>
+        
+            <GoogleMap zoom={10} 
+            mapContainerStyle={containerStyle}
+            center={center}>
+               
+           
+            </GoogleMap>
+
+        </Col>
+        </Row>
+        
 
 
         </>
