@@ -29,15 +29,17 @@ function App() {
 
         <Route path={RouteNames.SOBA_PREGLED} element={<SobePregled />} />
         <Route path={RouteNames.SOBA_NOVI} element={< SobeDodaj />} /> 
-    <Route path={RouteNames.SOBA_PROMJENA} element={< SobePromjena />} /> 
+        <Route path={RouteNames.SOBA_PROMJENA} element={< SobePromjena />} /> 
 
-  <Route path={RouteNames.PRIJEVOZ_GOSTA_PREGLED} element={<PrijevoziGostaPregled />} />
-  <Route path={RouteNames.PRIJEVOZ_GOSTA_NOVI} element={<PrijevoziGostaDodaj />} />
-  <Route path={RouteNames.PRIJEVOZ_GOSTA_PROMJENA} element={<PrijevoziGostaPromjena />} />
+        <Route path={RouteNames.PRIJEVOZ_GOSTA_PREGLED} element={<PrijevoziGostaPregled />} />
+        <Route path={RouteNames.PRIJEVOZ_GOSTA_NOVI} element={<PrijevoziGostaDodaj />} />
+        <Route path={RouteNames.PRIJEVOZ_GOSTA_PROMJENA} element={<PrijevoziGostaPromjena />} />
 
-  <Route path={RouteNames.GOST_PREGLED} element={<GostiPregled />} />
-  <Route path={RouteNames.GOST_NOVI} element={<GostiDodaj />} />
-  <Route path={RouteNames.GOST_PROMJENA} element={<GostiPromjena />} />
+        <Route path={RouteNames.GOST_PREGLED} element={<GostiPregled />} />
+        <Route path={RouteNames.GOST_NOVI} element={<GostiDodaj />} />
+        <Route path={RouteNames.GOST_PROMJENA} element={<GostiPromjena />} />
+
+        
 
       </Routes>
       </Container>

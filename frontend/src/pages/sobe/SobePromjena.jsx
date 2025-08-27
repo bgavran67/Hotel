@@ -56,6 +56,8 @@ export default function SobePromjena()
         
         Promjena sobe
         
+        <hr style={{marginTop: '15px'}} />
+
         <Form onSubmit={obradiSubmit}>
 
         <Form.Group controlId="tip sobe">

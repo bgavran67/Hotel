@@ -87,6 +87,8 @@ const center = {
         <>
         
         Promjena gosta
+        
+        <hr style={{marginTop: '15px'}} />
          <Row>
         <Col key='1' sm={12} lg={6} md={6}>
          <Form onSubmit={odradiSubmit}>
@@ -118,8 +120,6 @@ const center = {
             <Form.Control type="text" name="telefon" required
             defaultValue = {gost.telefon} />
 
-        <hr style={{marginTop: '15px'}} />
-
         </Form.Group>
 
         <Form.Group controlId="adresa">
@@ -127,6 +127,9 @@ const center = {
             <Form.Label>Adresa</Form.Label>
             <Form.Control type="text" name="adresa" required
             defaultValue = {gost.adresa} />
+
+            
+        <hr style={{marginTop: '15px'}} />
 
         </Form.Group>
 

@@ -73,6 +73,8 @@ export default function PrijevoziGostaPromjena(){
       <>
         Promjena prijevoza gostiju
 
+        <hr style={{marginTop: '15px'}} />
+        
           <Form onSubmit={obradiSubmit}>
             <Form.Label>Datum Polaska</Form.Label>
             <Form.Control type="date" name="datumPolaska" required defaultValue={prijevozGosta.datumPolaska}/>

@@ -16,7 +16,6 @@ export const RouteNames = {
     GOST_NOVI: '/gosti/dodaj',
     GOST_PROMJENA: '/gosti/:sifra'
 
-    /*ovdje dodati ostalo kasnije
     REZERVACIJA_PREGLED: '/rezervacije',
     REZERVACIJA_NOVI: '/rezervacije/dodaj',
     REZERVACIJA_PROMJENA: '/rezervacije/:sifra'
@@ -24,7 +23,7 @@ export const RouteNames = {
     
     
    
-    */
+
 }
 
 export const GOOGLE_MAPS_API = 'Ključ';
