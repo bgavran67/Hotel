@@ -32,7 +32,6 @@ export default function PrijevoziGostaPromjena(){
 
     useEffect(()=>{
         dohvatiPrijevozeGosta();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
 

@@ -1,3 +1,6 @@
+import { Button, Col, Form, Row} from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { RouteNames } from '../../constants';
 import GostiService from "../../services/GostiService";
 import SobeService from "../../services/SobeService";
 
@@ -55,6 +58,84 @@ export default function RezervacijePromjena() {
     navigate(RouteNames.REZERVACIJA_PREGLED);
 }
 
+function obradiSubmit(e){
+    e.preventDefault();
+
+    const podaci = new FormData(e.target);
+
+    promjena({
+        ukupnaCijena: parseFloat(podaci.get('ukupnaCijena')),
+        vrijemeDatumPrijave: moment.utc(podaci.get(('vrijemeDatumPrijave'))),
+        vrijemeDatumOdjave: moment.utc(podaci.get(('vrijemeDatumOdjave'))),
+        gostSifra: parseInt(gostSifra),
+        sobaSifra: parseInt(sobaSifra)
+    });
+  }
+
+
+  return(
+    <>
+      Promjena rezervacije
+
+      <hr style={{marginTop: '15px'}} />
+
+      <Form onSubmit={obradiSubmit}>
+
+        <Form.Label>Ukupna Cijena</Form.Label>
+        <Form.Control type="number" name="ukupnaCijena" required defaultValue={rezervacija.ukupnaCijena} />
+
+        <Form.Label>Vrijeme i Datum Prijave</Form.Label>
+        <Form.Control type="datetime" name="vrijemeDatumPrijave" required defaultValue={moment(rezervacija.vrijemeDatumPrijave)} />
+
+        <Form.Label>Vrijeme i Datum Odjave</Form.Label>
+        <Form.Control type="datetime" name="vrijemeDatumOdjave" required defaultValue={moment(rezervacija.vrijemeDatumOdjave)} />
+
+        <Form.Group className='mb-3' controlId='gost'>
+            <Form.Label>Gost</Form.Label>
+            <Form.Select
+            value={gostSifra}
+            onChange={(e)=>{setGostSifra(e.target.value)}}
+            >
+            {gosti && gosti.map((s,index)=>(
+              <option key={index} value={s.sifra}>
+                {s.ime} {s.prezime}
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
+
+        <Form.Group className='mb-3' controlId='soba'>
+            <Form.Label>Soba</Form.Label>
+            <Form.Select
+            value={sobaSifra}
+            onChange={(e)=>{setSobeSifra(e.target.value)}}
+            >
+            {sobe && sobe.map((s,index)=>(
+              <option key={index} value={s.sifra}>
+                {s.tipSobe} {s.cijena} 
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
+
+       <hr />
+       <Row> 
+        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
+              <Link to={RouteNames.REZERVACIJA_PREGLED}
+              className="btn btn-danger siroko">
+              Odustani
+              </Link>
+              </Col>
+              <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
+              <Button variant="primary" type="submit" className="siroko">
+                  Promjeni rezervaciju
+              </Button>
+              </Col>
+       </Row>
+
+      </Form>
+    </>
+  )
 
 
 }

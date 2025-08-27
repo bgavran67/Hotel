@@ -14,6 +14,9 @@ import PrijevoziGostaPromjena from './pages/prijevoziGosta/PrijevoziGostaPromjen
 import GostiPregled from './pages/gosti/GostiPregled'
 import GostiPromjena from './pages/gosti/GostiPromjena'
 import GostiDodaj from './pages/gosti/GostiDodaj'
+import RezervacijePromjena from './pages/rezervacije/RezervacijePromjena'
+import RezervacijePregled from './pages/rezervacije/RezervacijePregled'
+import RezervacijeDodaj from './pages/rezervacije/RezervacijeDodaj'
 
 
 function App() {
@@ -39,13 +42,17 @@ function App() {
         <Route path={RouteNames.GOST_NOVI} element={<GostiDodaj />} />
         <Route path={RouteNames.GOST_PROMJENA} element={<GostiPromjena />} />
 
+        <Route path={RouteNames.REZERVACIJA_PREGLED} element={<RezervacijePregled />} />
+        <Route path={RouteNames.REZERVACIJA_NOVI} element={<RezervacijeDodaj />} />
+        <Route path={RouteNames.REZERVACIJA_PROMJENA} element={<RezervacijePromjena />} />
+
         
 
       </Routes>
       </Container>
       
       <hr />
-      &copy; Barbara
+      &copy; Barbara 2025
     </Container>
   )
 }

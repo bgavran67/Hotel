@@ -14,7 +14,7 @@ export const RouteNames = {
     
     GOST_PREGLED: '/gosti',
     GOST_NOVI: '/gosti/dodaj',
-    GOST_PROMJENA: '/gosti/:sifra'
+    GOST_PROMJENA: '/gosti/:sifra',
 
     REZERVACIJA_PREGLED: '/rezervacije',
     REZERVACIJA_NOVI: '/rezervacije/dodaj',
