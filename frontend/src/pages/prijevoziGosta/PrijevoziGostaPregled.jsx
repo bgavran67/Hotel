@@ -41,7 +41,7 @@ export default function PrijevoziGostaPromjena(){
             <Link to={RouteNames.PRIJEVOZ_GOSTA_NOVI} className="btn btn-success siroko">
                 <IoIosAdd
                 size={25}
-                /> Dodaj
+                /> Dodaj novi prijevoz gosta
             </Link>
             <Table striped bordered hover responsive>
                 <thead>

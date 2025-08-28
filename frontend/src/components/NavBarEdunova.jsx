@@ -11,11 +11,6 @@ export default function NavBarEdunova() {
     const navigate = useNavigate();
 
 
-     function OpenSwaggerURL(){
-        window.open(BACKEND_URL + "/swagger/index.html", "_blank")
-      }
-
-
   return (
     <>
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -48,7 +43,6 @@ export default function NavBarEdunova() {
 
 
             </NavDropdown>
-            <Nav.Link  onClick={()=>OpenSwaggerURL()}>Swagger</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>
