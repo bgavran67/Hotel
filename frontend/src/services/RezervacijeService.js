@@ -3,7 +3,7 @@ import { HttpService } from "./HttpService";
 
 async function get() {
     
-    return await HttpService.get('/Rezervacija')
+    return await HttpService.get('/Rezervacije')
     .then((odgovor)=>{
         return odgovor.data
     })
@@ -12,29 +12,29 @@ async function get() {
 
 async function getBySifra(sifra) {
     
-    return await HttpService.get('/Rezervacija/' + sifra)
+    return await HttpService.get('/Rezervacije/' + sifra)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
     .catch(()=>{
-        return{greska: true, poruka: 'Ne postoji rezervacija!'}
+        return{greska: true, poruka: 'Ne postoji Rezervacije!'}
     })
 }
 
 async function obrisi(sifra) {
     
-    return await HttpService.delete('/Rezervacija/' + sifra)
+    return await HttpService.delete('/Rezervacije/' + sifra)
     .then((odgovor)=>{
         //console.log(odgovor);
         return {greska: false, poruka: odgovor.data}
     })
     .catch(()=>{
-        return {greska: true, poruka: 'Rezervacija se ne može obrisati!'}
+        return {greska: true, poruka: 'Rezervacije se ne može obrisati!'}
     })
 }
 
-async function dodaj(Rezervacija) {
-    return await HttpService.post('/Rezervacija',Rezervacija)
+async function dodaj(Rezervacije) {
+    return await HttpService.post('/Rezervacije',Rezervacije)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
@@ -47,14 +47,14 @@ async function dodaj(Rezervacija) {
                 }
                 return {greska: true, poruka: poruke}
             default:
-                return {greska: true, poruka: 'Rezervacija se ne može dodati!'}
+                return {greska: true, poruka: 'Rezervacije se ne može dodati!'}
         }
     })
 }
 
 
-async function promjena(sifra,Rezervacija) {
-    return await HttpService.put('/Rezervacija/' + sifra,Rezervacija)
+async function promjena(sifra,Rezervacije) {
+    return await HttpService.put('/Rezervacije/' + sifra,Rezervacije)
     .then((odgovor)=>{
         return {greska: false, poruka: odgovor.data}
     })
@@ -68,7 +68,7 @@ async function promjena(sifra,Rezervacija) {
                 console.log(poruke)
                 return {greska: true, poruka: poruke}
             default:
-                return {greska: true, poruka: 'Rezervacija se ne može promjeniti!'}
+                return {greska: true, poruka: 'Rezervacije se ne može promjeniti!'}
         }
     })
 }

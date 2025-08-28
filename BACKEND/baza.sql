@@ -32,7 +32,9 @@ ime varchar (50) not null,
 prezime varchar (60) not null,
 email varchar (100) not null,
 telefon varchar (25), 
-adresa varchar (100)
+adresa varchar (100),
+latitude decimal(8,6),
+longitude decimal(9,6)
 );
 
 create table prijevoz_gostiju(

@@ -14,12 +14,7 @@ export default function RezervacijePregled(){
  
     async function dohvatiRezervacije(){
         const odgovor = await Service.get();
-        if(odgovor.greska){
-            alert(odgovor.poruka);
-            return;
-        }
-        // console.log(odgovor.poruka);
-        setRezervacije(odgovor.poruka);
+        setRezervacije(odgovor);
     }
 
 
@@ -60,8 +55,8 @@ export default function RezervacijePregled(){
                             <td>{entitet.ukupnaCijena}</td>
                             <td>{entitet.vrijemeDatumPrijave}</td>
                             <td>{entitet.vrijemeDatumOdjave}</td>
-                            <td>{entitet.gost}</td>
-                            <td>{entitet.soba}</td>
+                            <td>{entitet.gostIme} {entitet.gostPrezime}</td>
+                            <td>{entitet.sobaTipSobe} {entitet.sobaCijena}</td>
                             <td className="sredina">
                                     <Button
                                         variant='primary'
