@@ -13,7 +13,9 @@ namespace BACKEND.Models.DTO
         [EmailAddress(ErrorMessage ="Email nije dobrog formata")]
         string? Email,
         string? Telefon,
-        string? Adresa
+        string? Adresa,
+        decimal? Latitude,
+        decimal? Longitude
     );
 }
 

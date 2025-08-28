@@ -10,7 +10,9 @@ namespace BACKEND.Models.DTO
         string? Prezime,
         string? Email,
         string? Telefon,
-        string? Adresa
+        string? Adresa,
+        decimal? Latitude, 
+        decimal? Longitude
     );
     
 }

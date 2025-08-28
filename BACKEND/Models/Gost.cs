@@ -15,6 +15,9 @@ namespace BACKEND.Models
 
         public string? Adresa { get; set; }
 
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
+
         public ICollection<Soba>? Sobe { get; set; }
 
 

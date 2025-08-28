@@ -36,8 +36,8 @@ async function dodaj(prijevozGosta) {
         switch (e.status){
             case 400:
                 let poruke='';
-                for(const kljuc in e.reposnse.data.errors){
-                    poruke += kljuc + ': ' + e.reposnse.data.errors[kljuc][0] + '\n';
+                for(const kljuc in e.response.data.errors){
+                    poruke += kljuc + ': ' + e.response.data.errors[kljuc][0] + '\n';
                 }
                 return {greska: true, poruka: poruke}
                 default: return {greska: true, poruka: 'Prijevoz gosta se ne može dodati!'}

@@ -26,7 +26,7 @@ export const RouteNames = {
 
 }
 
-export const GOOGLE_MAPS_API = 'Ključ';
+export const GOOGLE_MAPS_API = 'AIzaSyA6gfphXWd55k3ul-THOMsJLITROWvRvrg';
 
 //export const PRODUKCIJA='https://bgavran67-001-site1.qtempurl.com/';
 export const BACKEND_URL = 'https://localhost:7099/';
