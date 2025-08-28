@@ -38,12 +38,12 @@ export default function PrijevoziGostaDodaj() {
     const podaci = new FormData(e.target);
 
     dodaj({
-      datumPolaska: moment.utc(podaci.get('datumPolaska')),
-      datumOdlaska: moment.utc(podaci.get('datumOdlaska')),
+      datumPolaska: moment.utc(podaci.get('datumPolaska')).format('YYYY-MM-DD'),
+      datumOdlaska: moment.utc(podaci.get('datumOdlaska')).format('YYYY-MM-DD'),
       vrstaPrijevoza: podaci.get('vrstaPrijevoza'),
       lokacijaPolazista: podaci.get('lokacijaPolazista'),
       dostupnost: podaci.get('dostupnost'),
-      brojPutnika: parseFloat(podaci.get('brojPutnika')),
+      brojPutnika: parseInt(podaci.get('brojPutnika')),
       gostSifra: parseInt(gostSifra)
     });
   }
