@@ -13,7 +13,7 @@ namespace BACKEND.Models.DTO
         string? LokacijaPolazista,
         string? Dostupnost,
         [Required(ErrorMessage = "Broj putnika obavezno")]
-        int? BrojPutnika,
+        int BrojPutnika,
         int? GostSifra
     );
     

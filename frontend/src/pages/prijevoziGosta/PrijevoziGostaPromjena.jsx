@@ -14,11 +14,12 @@ export default function PrijevoziGostaPromjena(){
     const [gosti, setGosti] = useState([]);
     const [gostSifra, setGostSifra] = useState(0);
 
-    const [prijevozGosta, setPrijevozGosta] = useState();
+    const [prijevozGosta, setPrijevozGosta] = useState({});
 
     async function dohvatiGoste() {
         const odgovor = await GostiService.get();
         setGosti(odgovor.poruka);
+        setGostSifra(odgovor.poruka[0].sifra)
     }
 
     //nastavljamo za prijevoz g.
@@ -29,20 +30,24 @@ export default function PrijevoziGostaPromjena(){
             return;
         }
         let prijevozGosta = odgovor.poruka;
+        prijevozGosta.datumPolaska=moment(prijevozGosta.datumPolaska).format('YYYY-MM-DD')
+        prijevozGosta.datumOdlaska=moment(prijevozGosta.datumOdlaska).format('YYYY-MM-DD')
+        
         setPrijevozGosta(prijevozGosta);
         setGostSifra(prijevozGosta.gostSifra)
     }     
 
     async function dohvatiInicijalnePodatke() {
+      await dohvatiGoste();
         await dohvatiPrijevoziGosta();
-        await dohvatiGoste();
+        
     }
 
     useEffect(()=>{
         dohvatiInicijalnePodatke();
     },[]);
     
-    async function Promjena(e) {
+    async function promjena(e) {
         const odgovor = await Service.promjena(routeParams.sifra,e);
         if(odgovor.greska){
             alert(odgovor.poruka);
@@ -58,8 +63,8 @@ export default function PrijevoziGostaPromjena(){
     const podaci = new FormData(e.target);
 
     promjena({
-        datumPolaska: moment.utc(podaci.get(('datumPolaska'))),
-        datumOdlaska: moment.utc(podaci.get(('datumOdlaska'))),
+        datumPolaska: moment.utc(podaci.get(('datumPolaska'))).format('YYYY-MM-DD'),
+        datumOdlaska: moment.utc(podaci.get(('datumOdlaska'))).format('YYYY-MM-DD'),
         vrstaPrijevoza: podaci.get('vrstaPrijevoza'),
         lokacijaPolazista: podaci.get('lokacijaPolazista'),
         dostupnost: podaci.get('dostupnost'),
@@ -102,7 +107,7 @@ export default function PrijevoziGostaPromjena(){
               >
                 {gosti && gosti.map((s,index)=>(
                   <option key={index} value={s.sifra}>
-                    {s.naziv}
+                    {s.ime} {s.prezime}
                   </option>
                 ))}
               </Form.Select>

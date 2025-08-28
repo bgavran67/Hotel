@@ -27,10 +27,12 @@ namespace BACKEND.Mapping
                 .ForCtorParam("GostPrezime", 
                 opt => opt.MapFrom(src => src.Gost.Prezime));
 
-            
-            CreateMap<PrijevozGostaDTOInsertUpdate, PrijevozGosta>()
-                .ForMember(dest => dest.Gost,
-                opt => opt.Ignore());
+            CreateMap<PrijevozGosta, PrijevozGostaDTOInsertUpdate>()
+                .ForCtorParam("GostSifra",
+                opt => opt.MapFrom(src => src.Gost.Sifra));
+
+
+            CreateMap<PrijevozGostaDTOInsertUpdate, PrijevozGosta>();
 
 
             // REZERVACIJA

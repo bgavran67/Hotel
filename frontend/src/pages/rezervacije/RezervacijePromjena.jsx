@@ -3,6 +3,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RouteNames } from '../../constants';
 import GostiService from "../../services/GostiService";
 import SobeService from "../../services/SobeService";
+import Service from "../../services/RezervacijeService";
+import { useEffect, useState } from 'react';
+import moment from "moment";
 
 
 export default function RezervacijePromjena() {
@@ -45,7 +48,9 @@ export default function RezervacijePromjena() {
 
 
   useEffect(()=>{
-    dohvatiInicijalnePodatke();
+    dohvatiGoste();
+    dohvatiSobe();
+    dohvatiRezervacija();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
@@ -85,10 +90,10 @@ function obradiSubmit(e){
         <Form.Control type="number" name="ukupnaCijena" required defaultValue={rezervacija.ukupnaCijena} />
 
         <Form.Label>Vrijeme i Datum Prijave</Form.Label>
-        <Form.Control type="datetime" name="vrijemeDatumPrijave" required defaultValue={moment(rezervacija.vrijemeDatumPrijave)} />
+        <Form.Control type="datetime-local"  name="vrijemeDatumPrijave" required defaultValue={moment(rezervacija.vrijemeDatumPrijave).format('YYYY-MM-DDTHH:mm')} />
 
         <Form.Label>Vrijeme i Datum Odjave</Form.Label>
-        <Form.Control type="datetime" name="vrijemeDatumOdjave" required defaultValue={moment(rezervacija.vrijemeDatumOdjave)} />
+        <Form.Control type="datetime-local" name="vrijemeDatumOdjave" required defaultValue={moment(rezervacija.vrijemeDatumOdjave).format('YYYY-MM-DDTHH:mm')} />
 
         <Form.Group className='mb-3' controlId='gost'>
             <Form.Label>Gost</Form.Label>

@@ -5,6 +5,7 @@ import moment from "moment";
 import { RouteNames } from "../../constants";
 import GostiService from "../../services/GostiService";
 import SobeService from "../../services/SobeService";
+import Service from "../../services/RezervacijeService";
 
 export default function RezervacijeDodaj(){
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function RezervacijeDodaj(){
     }
 
     const [sobe, setSobe] = useState([]);
-    const [sobaSifra, setSobeSifra] = useState([]);
+    const [sobaSifra, setSobaSifra] = useState([]);
 
     async function dohvatiSobe(){
     const odgovor = await SobeService.get();
@@ -51,8 +52,8 @@ export default function RezervacijeDodaj(){
         ukupnaCijena: parseFloat(podaci.get('ukupnaCijena')),
         vrijemeDatumPrijave: moment.utc(podaci.get(('vrijemeDatumPrijave'))),
         vrijemeDatumOdjave: moment.utc(podaci.get(('vrijemeDatumOdjave'))),
-        gostSifra: parseInt(gostSifra),
-        sobaSifra: parseInt(sobaSifra)
+        gost: parseInt(gostSifra),
+        soba: parseInt(sobaSifra)
     });
   }
 
@@ -68,10 +69,10 @@ export default function RezervacijeDodaj(){
         <Form.Control type="number" step={0.01} name = "ukupnaCijena"></Form.Control>
 
         <Form.Label>Vrijeme i Datum Prijave</Form.Label>
-        <Form.Control type="datetime-local" name="vrijemeDatumPrijave" required defaultValue={moment(rezervacija.vrijemeDatumPrijave).format('YYYY-MM-DDTHH:mm')} />
+        <Form.Control type="datetime-local" name="vrijemeDatumPrijave" required  />
 
         <Form.Label>Vrijeme i Datum Odjave</Form.Label>
-        <Form.Control type="datetime-local" name="vrijemeDatumOdjave" required defaultValue={moment(rezervacija.vrijemeDatumOdjave).format('YYYY-MM-DDTHH:mm')} />
+        <Form.Control type="datetime-local" name="vrijemeDatumOdjave" required/>
 
         <Form.Group className='mb-3' controlId='gost'>
             <Form.Label>Gost</Form.Label>
@@ -91,7 +92,7 @@ export default function RezervacijeDodaj(){
             <Form.Label>Soba</Form.Label>
             <Form.Select
             value={sobaSifra}
-            onChange={(e)=>{setSobeSifra(e.target.value)}}
+            onChange={(e)=>{setSobaSifra(e.target.value)}}
             >
             {sobe && sobe.map((s,index)=>(
               <option key={index} value={s.sifra}>
@@ -113,7 +114,7 @@ export default function RezervacijeDodaj(){
               </Col>
               <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
               <Button variant="primary" type="submit" className="siroko">
-                  Promjeni rezervaciju
+                  Dodaj rezervaciju
               </Button>
               </Col>
        </Row>

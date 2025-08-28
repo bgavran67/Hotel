@@ -67,9 +67,42 @@ namespace BACKEND.Controllers
             {
                 return BadRequest(new { poruka = ModelState });
             }
+
+
+            Gost? g;
             try
             {
-                var e = _mapper.Map<Rezervacija>(dto);
+                g = _context.Gosti.Find(dto.Gost);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (g == null)
+            {
+                return NotFound(new { poruka = "Gost ne postoji u bazi" });
+            }
+
+            Soba? s;
+            try
+            {
+                s = _context.Sobe.Find(dto.Soba);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (s == null)
+            {
+                return NotFound(new { poruka = "Soba ne postoji u bazi" });
+            }
+
+
+            try
+            {
+                Rezervacija e = _mapper.Map<Rezervacija>(dto);
+                e.Soba = s;
+                e.Gost = g;
                 _context.Rezervacije.Add(e);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created, _mapper.Map<RezervacijaDTORead>(e));
@@ -108,8 +141,38 @@ namespace BACKEND.Controllers
                     return NotFound(new { poruka = "Rezervacija ne postoji u bazi" });
                 }
 
-                e = _mapper.Map(dto, e);
 
+                Gost? g;
+                try
+                {
+                    g = _context.Gosti.Find(dto.Gost);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (g == null)
+                {
+                    return NotFound(new { poruka = "Gost ne postoji u bazi" });
+                }
+
+                Soba? s;
+                try
+                {
+                    s = _context.Sobe.Find(dto.Soba);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (s == null)
+                {
+                    return NotFound(new { poruka = "Soba ne postoji u bazi" });
+                }
+
+                e = _mapper.Map(dto, e);
+                e.Soba = s;
+                e.Gost = g;
                 _context.Rezervacije.Update(e);
                 _context.SaveChanges();
 

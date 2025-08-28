@@ -34,9 +34,7 @@ export default function RezervacijePregled(){
     return(
         <Container>
             <Link to={RouteNames.REZERVACIJA_NOVI} className="btn btn-success siroko">
-                <IoIosAdd
-                size={25}
-                /> Dodaj novu rezervaciju
+                Dodaj novu rezervaciju
             </Link>
             <Table striped bordered hover responsive>
                 <thead>

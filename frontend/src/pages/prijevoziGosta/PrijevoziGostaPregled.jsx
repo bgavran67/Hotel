@@ -21,7 +21,7 @@ export default function PrijevoziGostaPromjena(){
     }
 
     async function obrisiPrijevozGosta(sifra) {
-        const odgovor = await Service.obrisi(sifra);
+        const odgovor = await Service.brisanje(sifra);
         //console.log(odgovor);
         if(odgovor.greska){
             alert(odgovor.poruka);
@@ -39,10 +39,9 @@ export default function PrijevoziGostaPromjena(){
 
         <Container>
             <Link to={RouteNames.PRIJEVOZ_GOSTA_NOVI} className="btn btn-success siroko">
-                <IoIosAdd
-                size={25}
-                /> Dodaj novi prijevoz gosta
+               Dodaj novi prijevoz gosta
             </Link>
+            
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
@@ -56,6 +55,7 @@ export default function PrijevoziGostaPromjena(){
                         <th>Akcija</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     {prijevoziGosta && prijevoziGosta.map((entitet,index)=>(
                         <tr key={index}>
@@ -71,7 +71,7 @@ export default function PrijevoziGostaPromjena(){
                             <td className="sredina">
                                     <Button
                                         variant='primary'
-                                        onClick={()=>{navigate(`/prijevoziGosta/${entitet.sifra}`)}}
+                                        onClick={()=>{navigate(`/prijevozgosta/${entitet.sifra}`)}}
                                     >
                                         <FaEdit 
                                     size={25}
@@ -80,6 +80,7 @@ export default function PrijevoziGostaPromjena(){
                                
                                 
                                     &nbsp;&nbsp;&nbsp;
+
                                     <Button
                                         variant='danger'
                                         onClick={() => obrisiPrijevozGosta(entitet.sifra)}
