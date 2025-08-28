@@ -41,9 +41,7 @@ export default function RezervacijePregled(){
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
-                        <th>Ukupna cijena</th>
-                        <th> Vrijeme i datum prijave</th>
-                        <th>Vrijeme i datum odjave</th>
+                        
                         <th>Gost</th>
                         <th>Soba</th>
                         <th>Akcija</th>
@@ -52,10 +50,9 @@ export default function RezervacijePregled(){
                 <tbody>
                     {rezervacije && rezervacije.map((entitet,index)=>(
                         <tr key={index}>
-                            <td>{entitet.ukupnaCijena}</td>
-                            <td>{entitet.vrijemeDatumPrijave}</td>
-                            <td>{entitet.vrijemeDatumOdjave}</td>
-                            <td>{entitet.gostIme} {entitet.gostPrezime}</td>
+                            <td>{entitet.gostIme} {entitet.gostPrezime} <br />
+                            {entitet.ukupnaCijena} <br />
+                             {entitet.vrijemeDatumPrijave} {entitet.vrijemeDatumOdjave}</td>
                             <td>{entitet.sobaTipSobe} {entitet.sobaCijena}</td>
                             <td className="sredina">
                                     <Button
